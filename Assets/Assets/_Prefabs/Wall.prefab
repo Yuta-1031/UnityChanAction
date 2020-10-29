@@ -204,12 +204,17 @@ PrefabInstance:
     - target: {fileID: 4734871107754636568, guid: 3e611ff18b87c4061a49d5c5bdadf0b3,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4734871107754636568, guid: 3e611ff18b87c4061a49d5c5bdadf0b3,
         type: 3}
       propertyPath: m_Lightmapping
-      value: 4
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4734871107754636568, guid: 3e611ff18b87c4061a49d5c5bdadf0b3,
+        type: 3}
+      propertyPath: m_ShadowRadius
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5548875035569115007, guid: 3e611ff18b87c4061a49d5c5bdadf0b3,
         type: 3}
