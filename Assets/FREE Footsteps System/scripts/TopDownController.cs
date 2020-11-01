@@ -63,7 +63,7 @@ namespace Footsteps {
             //追加
             if (Input.GetMouseButtonDown(0))
             {
-				thisAnimator.SetBool("attack", true);
+				thisAnimator.SetBool("Attack", true);
             }
 		}
 		void AttackStart()
@@ -74,21 +74,13 @@ namespace Footsteps {
 		void AttackEnd()
         {
 			capsuleCollider.enabled = false;
-			thisAnimator.SetBool("attack", false);
+			thisAnimator.SetBool("Attack", false);
         }
 
 		void MoveCharacter() {
-			if(capsuleCollider.enabled == false)
-            {
-				Vector3 velocity = thisTransform.forward * moveSpeed * jogSpeed;
-				velocity.y = thisRigidbody.velocity.y;
-				thisRigidbody.velocity = velocity;
-            }
-
-			if(capsuleCollider == true)
-            {
-				Vector3 velocity1 = new Vector3(0, 0, 0);
-            }
+			Vector3 velocity = thisTransform.forward * moveSpeed * jogSpeed;
+			velocity.y = thisRigidbody.velocity.y;
+			thisRigidbody.velocity = velocity;
 		}
 
 		void RotateCharacter() {
