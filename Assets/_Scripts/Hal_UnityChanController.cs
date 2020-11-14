@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Footsteps {
+namespace Footsteps
+{
 
 	[RequireComponent(typeof(Rigidbody), typeof(Animator))]
-	public class TopDownController : MonoBehaviour {
+	public class Hal_UnityChanController : MonoBehaviour
+	{
 
 		[SerializeField] Transform cameraPivot;
 		[SerializeField] float jogSpeed = 5f;
@@ -22,31 +24,32 @@ namespace Footsteps {
 		float moveSpeed;
 		bool turningOnSpot;
 		bool isMoving;
-		/*private float isRunning;
-		private float isMoving;
-		private bool isAttack;*/
-		public CapsuleCollider capsuleCollider;
 
+		public GameObject shot;
 
-		void Start() {
+		void Start()
+		{
 			thisTransform = transform;
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
 
-			if(!thisAnimator || !thisRigidbody) {
+			if (!thisAnimator || !thisRigidbody)
+			{
 				//Debug.LogError("Please assign both a rigidbody and an animator to this gameobject, top down controller will not function.");
 				enabled = false;
 			}
 		}
 
-		void FixedUpdate() {
+		void FixedUpdate()
+		{
 			UpdateAnimator();
 			RotateCharacter();
 			MoveCharacter();
 			//print(directionalInput);
 		}
 
-		void UpdateAnimator() {
+		void UpdateAnimator()
+		{
 			currentLocomotionInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
 
 			// Get player input
@@ -60,38 +63,30 @@ namespace Footsteps {
 			thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
 			thisAnimator.SetBool("move", isMoving);
 
-            //追加
             if (Input.GetMouseButtonDown(0))
             {
 				thisAnimator.SetBool("Attack", true);
             }
 		}
-		void AttackStart()
-        {
-			capsuleCollider.enabled = true;
-        }
 
-		void AttackEnd()
-        {
-			capsuleCollider.enabled = false;
-			thisAnimator.SetBool("Attack", false);
-        }
-
-		void MoveCharacter() {
+		void MoveCharacter()
+		{
 			Vector3 velocity = thisTransform.forward * moveSpeed * jogSpeed;
 			velocity.y = thisRigidbody.velocity.y;
 			thisRigidbody.velocity = velocity;
 		}
 
-		void RotateCharacter() {
+		void RotateCharacter()
+		{
 			movementDirection = cameraPivot.right * directionalInput.x + cameraPivot.forward * directionalInput.y;
 			bool inIdle = currentLocomotionInfo.IsName("idle");
 			float deltaAngle = 0f;
 			float targetRotationSpeed = rotationSpeed;
 
-			if(turningOnSpot) targetRotationSpeed = turningOnSpotRotationSpeed;
+			if (turningOnSpot) targetRotationSpeed = turningOnSpotRotationSpeed;
 
-			if(inIdle) {
+			if (inIdle)
+			{
 				Vector3 targetDirection = new Vector3(movementDirection.x, 0f, movementDirection.z);
 				deltaAngle = Vector3.Angle(targetDirection, transform.forward);
 				float angleSign = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
@@ -100,7 +95,8 @@ namespace Footsteps {
 
 			turningOnSpot = Mathf.Abs(deltaAngle) > 30f && inIdle;
 
-			if(movementDirection != Vector3.zero) {
+			if (movementDirection != Vector3.zero)
+			{
 				targetRotation = Quaternion.LookRotation(movementDirection);
 				thisTransform.rotation = Quaternion.RotateTowards(thisTransform.rotation, targetRotation, Time.deltaTime * targetRotationSpeed);
 			}
