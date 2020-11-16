@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class ContinuityAttackBehaviour : StateMachineBehaviour
 {
+    TwoBoneIKConstraint r_Aram;
     Vector3 position;
     Quaternion rotation;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state

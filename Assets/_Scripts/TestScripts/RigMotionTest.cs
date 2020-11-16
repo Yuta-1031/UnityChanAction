@@ -5,16 +5,19 @@ using UnityEngine.Animations.Rigging;
 
 public class RigMotionTest : MonoBehaviour
 {
+    private TwoBoneIKConstraint r_Aram;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
-        
+       this.r_Aram = GetComponent<TwoBoneIKConstraint>();
+        this.anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        var A = GetComponent<TwoBoneIKConstraint>();
-        A.weight = 0f;
+        
+        r_Aram.weight = 0f;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Animations.Rigging;
 
 namespace Footsteps
 {
@@ -16,6 +17,9 @@ namespace Footsteps
 		Transform thisTransform;
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
+		TwoBoneIKConstraint r_AramRig;
+		AnimatorStateInfo animStateInfo;
+		bool aramMotion;
 
 		AnimatorStateInfo currentLocomotionInfo;
 		Quaternion targetRotation;
@@ -24,8 +28,6 @@ namespace Footsteps
 		float moveSpeed;
 		bool turningOnSpot;
 		bool isMoving;
-
-		public GameObject shot;
 
 		void Start()
 		{
@@ -63,11 +65,52 @@ namespace Footsteps
 			thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
 			thisAnimator.SetBool("move", isMoving);
 
+			this.animStateInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
+			this.r_AramRig =GameObject.Find("R_AramConstraint").GetComponent<TwoBoneIKConstraint>();
+
+
             if (Input.GetMouseButtonDown(0))
             {
 				thisAnimator.SetBool("Attack", true);
+
+            }
+
+			if(aramMotion == true)
+            {
+				r_AramRig.weight = 0f;
+				Debug.Log("true");
+            }
+			if(aramMotion == false)
+            {
+				r_AramRig.weight = 1.0f;
+				Debug.Log("false");
             }
 		}
+
+		void AttackStart()
+		{
+			this.aramMotion = true;
+		}
+
+		void AttackEnd()
+		{
+			//this.aramMotion = false;
+			//thisAnimator.SetBool("Attack", false);
+
+		}
+
+		void Attack2Start()
+		{
+			//this.aramMotion = true;
+		}
+
+		void Attack2End()
+		{
+			this.aramMotion = false;
+			thisAnimator.SetBool("Attack", false);
+
+		}
+
 
 		void MoveCharacter()
 		{

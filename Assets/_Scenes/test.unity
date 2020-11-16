@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 153466545}
   - component: {fileID: 153466546}
   m_Layer: 0
-  m_Name: R_AramConstraint
+  m_Name: R_LegConstraint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,14 +1051,13 @@ GameObject:
   - component: {fileID: 371494358}
   - component: {fileID: 371494357}
   - component: {fileID: 371494356}
-  - component: {fileID: 371494359}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &371494355
 Transform:
   m_ObjectHideFlags: 0
@@ -1067,7 +1066,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371494354}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.000061035156, z: 0}
+  m_LocalPosition: {x: -0.03, y: 5.42, z: -40.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1100516819}
@@ -1133,18 +1132,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 371494354}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &371494359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371494354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c36096a77a681440d83b3ef436226847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &384870769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1273,7 +1260,6 @@ MonoBehaviour:
   jogSpeed: 4
   rotationSpeed: 270
   turningOnSpotRotationSpeed: 360
-  shot: {fileID: 2704021775097204508, guid: 7008fb352633a436a90fb63cbcff8c68, type: 3}
 --- !u!4 &428130216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400374, guid: 2729e2a44b0cc9742a0e7e48e38501be,
@@ -3589,7 +3575,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1565776834}
   - component: {fileID: 1565776835}
-  - component: {fileID: 1565776836}
   m_Layer: 0
   m_Name: R_AramConstraint
   m_TagString: Untagged
@@ -3638,18 +3623,6 @@ MonoBehaviour:
     m_MaintainTargetRotationOffset: 0
   m_SourceObjectsGUIToggle: 1
   m_SettingsGUIToggle: 0
---- !u!114 &1565776836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565776833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2de9b590fe0ec49aa836eb38c9109ac3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1582090748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: 2729e2a44b0cc9742a0e7e48e38501be,
