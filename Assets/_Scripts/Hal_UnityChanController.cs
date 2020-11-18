@@ -18,9 +18,9 @@ namespace Footsteps
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
 		TwoBoneIKConstraint r_ArmRig;
-		TwoBoneIKConstraint l_ArmRig;
 		AnimatorStateInfo animStateInfo;
-		bool aramMotion;
+		bool armMotion;
+		bool subMotion;
 
 		AnimatorStateInfo currentLocomotionInfo;
 		Quaternion targetRotation;
@@ -68,58 +68,44 @@ namespace Footsteps
 
 			//this.animStateInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
 			this.r_ArmRig =GameObject.Find("R_ArmConstraint").GetComponent<TwoBoneIKConstraint>();
-			this.l_ArmRig = GameObject.Find("L_ArmConstraint").GetComponent<TwoBoneIKConstraint>();
 
-
-            if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0))
             {
 				thisAnimator.SetBool("Attack", true);
+				armMotion = true;
             }
 
-			if(aramMotion == true)
+			if(armMotion == true)
             {
 				r_ArmRig.weight = 0f;
-				l_ArmRig.weight = 0f;
-				//Debug.Log("true");
+				Debug.Log("true");
             }
-			if(aramMotion == false)
+			if(armMotion == false)
             {
 				r_ArmRig.weight = 1.0f;
-				l_ArmRig.weight = 0.25f;
-				//Debug.Log("false");
+				Debug.Log("false");
             }
 		}
 
 		void AttackStart()
 		{
-			this.aramMotion = true;
+			this.armMotion = true;
 		}
 
-		void AttackEnd()
+		void Attackend()
 		{
-			//this.aramMotion = false;
+			this.armMotion = false;
 			//thisAnimator.SetBool("Attack", false);
-
-		}
-
-		void Attack2Start()
-		{
-			//this.aramMotion = true;
-		}
-
-		void Attack2End()
-		{
-			//this.aramMotion = false;
-			//thisAnimator.SetBool("Attack", false);
-
+			//Invoke("MotionEnd", 2f);
 		}
 
 		void Attack3End()
 		{
-			this.aramMotion = false;
+			this.armMotion = false;
 			thisAnimator.SetBool("Attack", false);
 
 		}
+
 
 		void MoveCharacter()
 		{
