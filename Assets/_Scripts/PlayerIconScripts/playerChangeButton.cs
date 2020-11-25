@@ -5,21 +5,32 @@ using UnityEngine.UI;
 
 public class playerChangeButton : MonoBehaviour
 {
-    private Transform player;
-    private Transform offPlayer;
+    [SerializeField] GameObject player1;
+    [SerializeField] GameObject player2;
+    private Transform player1Pos;
+    private Transform player2Pos;
     private Transform cube;
 
     private void Start()
     {
         //this.cube = transform.Find("Cube");
-        this.player = transform.Find("Player1");
-        this.offPlayer = transform.Find("Player2");
+        //this.player = GameObject.FindWithTag("Player1");
+        //this.offPlayer = GameObject.FindWithTag("Player2");
     }
     public void OnClick()
     {
-        //cube.gameObject.SetActive(false);
-        player.gameObject.SetActive(false);
-        offPlayer.gameObject.SetActive(true);
-        //Debug.Log("click");
+        player2.transform.position = player1.transform.position;
+        player1.SetActive(false);
+        player2.SetActive(true);
+
+        /*if(player1 == true)
+        {
+            player1Pos = player1.transform.Find("Player");
+            player2.gameObject.SetActive(true);
+            player2Pos = player2.transform.Find("Hal_UnityChan");
+            
+            player1.gameObject.SetActive(false);
+            player2Pos.transform.position = player1Pos.transform.position;
+        }*/
     }
 }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Player2Change : MonoBehaviour
 {
-    private Transform player;
-    private Transform offPlayer;
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject offPlayer;
     private Transform cube;
 
     private void Start()
     {
-        this.player = transform.Find("Player2");
-        this.offPlayer = transform.Find("Player1");
+        //this.player = GameObject.FindWithTag("Player2");
+        //this.offPlayer = GameObject.FindWithTag("Player1");
     }
     public void Click()
     {

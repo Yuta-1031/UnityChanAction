@@ -18,10 +18,8 @@ namespace Footsteps
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
 		TwoBoneIKConstraint r_ArmRig;
-		AnimatorStateInfo animStateInfo;
 		bool armMotion;
-		bool subMotion;
-
+		
 		AnimatorStateInfo currentLocomotionInfo;
 		Quaternion targetRotation;
 		Vector3 movementDirection;
@@ -29,6 +27,9 @@ namespace Footsteps
 		float moveSpeed;
 		bool turningOnSpot;
 		bool isMoving;
+
+		effect script;
+		public GameObject Hal_AttackEffect;
 
 		void Start()
 		{
@@ -66,7 +67,6 @@ namespace Footsteps
 			thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
 			thisAnimator.SetBool("move", isMoving);
 
-			//this.animStateInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
 			this.r_ArmRig =GameObject.Find("R_ArmConstraint").GetComponent<TwoBoneIKConstraint>();
 
 			if (Input.GetMouseButtonDown(0))
@@ -78,12 +78,12 @@ namespace Footsteps
 			if(armMotion == true)
             {
 				r_ArmRig.weight = 0f;
-				Debug.Log("true");
+				//Debug.Log("true");
             }
 			if(armMotion == false)
             {
 				r_ArmRig.weight = 1.0f;
-				Debug.Log("false");
+				//Debug.Log("false");
             }
 		}
 
@@ -91,6 +91,7 @@ namespace Footsteps
 		{
 			this.armMotion = true;
 		}
+	
 
 		void Attackend()
 		{
@@ -106,6 +107,11 @@ namespace Footsteps
 
 		}
 
+		void AttackEffect()
+        {
+			script = Hal_AttackEffect.GetComponent<effect>();
+			script.Effect();
+        }
 
 		void MoveCharacter()
 		{
