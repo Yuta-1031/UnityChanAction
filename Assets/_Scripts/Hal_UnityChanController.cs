@@ -9,31 +9,23 @@ namespace Footsteps
 	public class Hal_UnityChanController : MonoBehaviour
 	{
 
-		[SerializeField] Transform cameraPivot;
-		[SerializeField] float jogSpeed = 5f;
-		[SerializeField] float rotationSpeed = 270f;
-		[SerializeField] float turningOnSpotRotationSpeed = 360f;
-
-		Transform thisTransform;
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
 		TwoBoneIKConstraint r_ArmRig;
 		bool armMotion;
-		
-		AnimatorStateInfo currentLocomotionInfo;
-		Quaternion targetRotation;
-		Vector3 movementDirection;
+
 		Vector2 directionalInput;
 		float moveSpeed;
-		bool turningOnSpot;
 		bool isMoving;
 
 		effect script;
 		public GameObject Hal_AttackEffect;
 
+		public float nowPosi;
+
 		void Start()
 		{
-			thisTransform = transform;
+			nowPosi = this.transform.position.y;
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
 
@@ -47,14 +39,10 @@ namespace Footsteps
 		void FixedUpdate()
 		{
 			UpdateAnimator();
-			RotateCharacter();
-			MoveCharacter();
-			//print(directionalInput);
 		}
 
 		void UpdateAnimator()
 		{
-			currentLocomotionInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
 
 			// Get player input
 			directionalInput.x = Input.GetAxisRaw("Horizontal");
@@ -67,31 +55,33 @@ namespace Footsteps
 			thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
 			thisAnimator.SetBool("move", isMoving);
 
-			this.r_ArmRig =GameObject.Find("R_ArmConstraint").GetComponent<TwoBoneIKConstraint>();
+			this.r_ArmRig = GameObject.Find("R_ArmConstraint").GetComponent<TwoBoneIKConstraint>();
 
 			if (Input.GetMouseButtonDown(0))
-            {
+			{
 				thisAnimator.SetBool("Attack", true);
 				armMotion = true;
-            }
+			}
 
-			if(armMotion == true)
-            {
+			if (armMotion == true)
+			{
 				r_ArmRig.weight = 0f;
 				//Debug.Log("true");
-            }
-			if(armMotion == false)
-            {
+			}
+			if (armMotion == false)
+			{
 				r_ArmRig.weight = 1.0f;
 				//Debug.Log("false");
-            }
+			}
+
+			//transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.deltaTime/5, 0.3f), transform.position.z);
 		}
 
 		void AttackStart()
 		{
 			this.armMotion = true;
 		}
-	
+
 
 		void Attackend()
 		{
@@ -108,42 +98,9 @@ namespace Footsteps
 		}
 
 		void AttackEffect()
-        {
+		{
 			script = Hal_AttackEffect.GetComponent<effect>();
 			script.Effect();
-        }
-
-		void MoveCharacter()
-		{
-			Vector3 velocity = thisTransform.forward * moveSpeed * jogSpeed;
-			velocity.y = thisRigidbody.velocity.y;
-			thisRigidbody.velocity = velocity;
-		}
-
-		void RotateCharacter()
-		{
-			movementDirection = cameraPivot.right * directionalInput.x + cameraPivot.forward * directionalInput.y;
-			bool inIdle = currentLocomotionInfo.IsName("idle");
-			float deltaAngle = 0f;
-			float targetRotationSpeed = rotationSpeed;
-
-			if (turningOnSpot) targetRotationSpeed = turningOnSpotRotationSpeed;
-
-			if (inIdle)
-			{
-				Vector3 targetDirection = new Vector3(movementDirection.x, 0f, movementDirection.z);
-				deltaAngle = Vector3.Angle(targetDirection, transform.forward);
-				float angleSign = Mathf.Sign(Vector3.Cross(transform.forward, targetDirection).y);
-				deltaAngle *= angleSign;
-			}
-
-			turningOnSpot = Mathf.Abs(deltaAngle) > 30f && inIdle;
-
-			if (movementDirection != Vector3.zero)
-			{
-				targetRotation = Quaternion.LookRotation(movementDirection);
-				thisTransform.rotation = Quaternion.RotateTowards(thisTransform.rotation, targetRotation, Time.deltaTime * targetRotationSpeed);
-			}
 		}
 	}
 }

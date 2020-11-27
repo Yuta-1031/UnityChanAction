@@ -4,50 +4,42 @@ using UnityEngine;
 
 public class test : MonoBehaviour
 {
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject player2;
+ 
+    private bool pl_Change = true;
 
-    public float speed = 3f;
-    public float jumpSpeed = 3f;
-
-    private Rigidbody rb;
-    private float h, v;
-    private Vector3 moveDirection = Vector3.zero;
-    private bool isGrounded = false;
-    private Vector3 latestPos;
-
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        player.SetActive(true);
+        player2.SetActive(false);
     }
 
-    void Update()
+    private void Update()
     {
 
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
-
-        //足元から下へ向けてRayを発射し，着地判定をする
-        isGrounded = Physics.Raycast(gameObject.transform.position + 0.1f * gameObject.transform.up, -gameObject.transform.up, 0.15f);
-        //デバッグ用にシーンにRayを表示する
-        Debug.DrawRay(gameObject.transform.position + 0.1f * gameObject.transform.up, -0.15f * gameObject.transform.up, Color.blue);
-
-        if (isGrounded || Mathf.Abs(rb.velocity.y) < 0.01f)
+        if (Input.GetMouseButtonDown(1))
         {
-            if (h != 0 || v != 0)
+            if(pl_Change == true)
             {
-                moveDirection = speed * new Vector3(h, 0, v);
-                moveDirection = transform.TransformDirection(moveDirection);
-                rb.velocity = moveDirection;
-            }
-            Vector3 diff = transform.position - latestPos;
+                player2.transform.position = player.transform.position;
+                player2.transform.rotation = player.transform.rotation;
+                
+                player.SetActive(false);
+                player2.SetActive(true);
 
-            if (diff.magnitude > 0.01f)
-            {
-                transform.rotation = Quaternion.LookRotation(diff);
+                pl_Change = false;
             }
-            latestPos = transform.position;
+            else if(pl_Change == false)
+            {
+                player.transform.position = player2.transform.position;
+                player.transform.rotation = player2.transform.rotation;
+                
+                player.SetActive(true);
+                player2.SetActive(false);
+
+                pl_Change = true;
+            }
         }
-
     }
-
 }

@@ -1,27 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class PlayerForward : MonoBehaviour
+namespace Footsteps
 {
-    private Transform followTfm;
-    //private Vector3 pos;
+	public class PlayerForward : MonoBehaviour
+	{
+		public GameObject player;
 
-    float smoothTime = 0.5f;
+		void Start()
+		{
 
-    Vector3 velocity = Vector3.zero;
 
-    void Start()
-    {
-    }
+		}
+        private void Update()
+        {
+			player.transform.Find("Player");
+			player.GetComponent<Transform>();
 
-   void FixedUpdate()
-    {
-        followTfm = GameObject.FindGameObjectWithTag("Player2").transform;
-        //pos = GameObject.FindGameObjectWithTag("Player2").transform.position;
-        //transform.position = new Vector3(pos.x + 0.3f, pos.y + 2f, pos.z - 0.5f);
-        transform.rotation = followTfm.transform.rotation;
-        Vector3 targetPos = followTfm.TransformPoint(new Vector3(0.3f, 1.5f, -0.5f));
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref velocity, smoothTime);
+			this.transform.position = player.transform.position;
+        }
     }
 }
