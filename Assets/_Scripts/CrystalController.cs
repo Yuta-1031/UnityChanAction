@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CrystalController : MonoBehaviour
 {
+    public GameObject ps;
+    public GameObject gate1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,9 @@ public class CrystalController : MonoBehaviour
        //Debug.Log(other.gameObject.tag);
         if(other.collider.gameObject.tag == "Sword")
         {
-            Destroy(this.gameObject);
+            Instantiate(ps, this.transform.position, Quaternion.identity);
+            Destroy(this.gate1);
+            Destroy(this.gameObject, 0.2f);
         }
     }
 }
