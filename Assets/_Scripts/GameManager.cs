@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public GameObject player;
     public GameObject player2;
+    public GameObject icon;
     public float playerLife = 100;
     public float player2Life = 100;
 
