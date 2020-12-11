@@ -20,14 +20,18 @@ namespace Footsteps
 
 		effect script;
 		public GameObject Hal_AttackEffect;
-
 		public float nowPosi;
+		public float move_Y;
+		public float delay;
+		public float time;
 
 		void Start()
 		{
 			nowPosi = this.transform.position.y;
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
+
+			//iTween.MoveAdd(gameObject, iTween.Hash("Y", move_Y, "time", time, "delay", delay, "loppType", "pingPong"));
 
 			if (!thisAnimator || !thisRigidbody)
 			{
@@ -43,6 +47,8 @@ namespace Footsteps
 
 		void UpdateAnimator()
 		{
+			//transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time / 3, move_Y), transform.position.z);
+			thisRigidbody.AddForce(transform.up * 9.2f, ForceMode.Force);
 
 			// Get player input
 			directionalInput.x = Input.GetAxisRaw("Horizontal");

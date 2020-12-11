@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 namespace Footsteps {
 
@@ -45,7 +46,11 @@ namespace Footsteps {
 			thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
 			thisAnimator.SetBool("move", isMoving);
 
-            //追加
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+				return;
+            }
+
             if (Input.GetMouseButtonDown(0))
             {
 				thisAnimator.SetBool("Attack", true);
