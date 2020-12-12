@@ -5,35 +5,24 @@ using UnityEngine.Animations.Rigging;
 
 public class RigMotionTest : MonoBehaviour
 {
-    public float time;
-    public float delay;
-    public float move_Y;
-    private int frameCnt = 0;
-
-    void Update()
-    {
-        //iTween.MoveTo(gameObject, iTween.Hash("Y", transform.position.y + 1f));
-    }
+    [SerializeField] Rigidbody rb;
 
     private void Start()
     {
-        //iTween.MoveAdd(gameObject, iTween.Hash("Y", move_Y, "time", time,"delay", delay, "loopType", "pingPong"));
-        //iTween.MoveAdd(gameObject, iTween.Hash("Y", -2f, "time", 2f, "delay", 1.0f, "loopType", "loop"));
+        rb.GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
     }
 
     private void FixedUpdate()
     {
-        frameCnt += 1;
+        rb.AddForce(transform.up * 9.81f, ForceMode.Force);
 
-        if(10000 <= frameCnt)
+        if (Input.GetMouseButtonDown(0))
         {
-            frameCnt = 0;
-        }
-
-        if(0 == frameCnt % 2)
-        {
-            float posYSin = Mathf.Sin(2.0f * Mathf.PI * (float)(frameCnt % 200) / (200.0f - 1.0f));
-            iTween.MoveAdd(gameObject, new Vector3(0, move_Y * posYSin, 0), 0.0f);
+            rb.AddForce(transform.up * -100, ForceMode.Force);
         }
     }
 }

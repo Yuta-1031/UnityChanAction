@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class BallShoot : MonoBehaviour
 {
-    public float nowPosi;
+    [SerializeField] GameObject hal_Player;
+    [SerializeField] Footsteps.Hal_UnityChanController hal_Sc;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        nowPosi = this.transform.position.y;
+        //hal_Player = GameObject.FindWithTag("Player");
+        hal_Sc = hal_Player.GetComponent<Footsteps.Hal_UnityChanController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.deltaTime/3, 0.3f), transform.position.z);
+        hal_Sc.gravity();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        hal_Sc.noGravity();
     }
 }

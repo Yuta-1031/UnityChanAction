@@ -25,6 +25,8 @@ namespace Footsteps
 		public float delay;
 		public float time;
 
+		private float t_Up;
+
 		void Start()
 		{
 			nowPosi = this.transform.position.y;
@@ -38,17 +40,38 @@ namespace Footsteps
 				//Debug.LogError("Please assign both a rigidbody and an animator to this gameobject, top down controller will not function.");
 				enabled = false;
 			}
+
+			this.t_Up = 9.81f;
 		}
+
 
 		void FixedUpdate()
 		{
 			UpdateAnimator();
 		}
 
+		public void noGravity()
+        {
+			this.t_Up = 9f;
+
+			Invoke("_nogravity", 1.0f);
+        }
+
+		void _nogravity()
+        {
+			this.t_Up = 9.81f;
+        }
+
+		public void gravity()
+        {
+			this.t_Up = 0;
+        }
+
 		void UpdateAnimator()
 		{
 			//transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time / 3, move_Y), transform.position.z);
-			thisRigidbody.AddForce(transform.up * 9.2f, ForceMode.Force);
+			thisRigidbody.AddForce(transform.up * t_Up, ForceMode.Force);
+			Debug.Log(t_Up);
 
 			// Get player input
 			directionalInput.x = Input.GetAxisRaw("Horizontal");
