@@ -11,6 +11,8 @@ TagManager:
   - Fire
   - Player1
   - FxTemporaire
+  - Floor
+  - Ceiling
   layers:
   - Default
   - TransparentFX

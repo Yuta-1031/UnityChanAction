@@ -4,44 +4,17 @@ using UnityEngine;
 
 public class CameraControl : MonoBehaviour
 {
-    GameObject cameraParent;
-    private Vector3 defaultPosition;
-    private Quaternion defaultRotation;
-    private float defaultZoom;
+    [SerializeField] GameObject hal_Pl;
+    [SerializeField] Footsteps.Hal_UnityChanController hal_Sc;
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        cameraParent = GameObject.Find("CameraParent");
-
-        defaultPosition = Camera.main.transform.position;
-        defaultRotation = cameraParent.transform.rotation;
-        defaultZoom = Camera.main.fieldOfView;
+      hal_Sc = hal_Pl.GetComponent<Footsteps.Hal_UnityChanController>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetMouseButton(0))
-        {
-            cameraParent.transform.Translate(Input.GetAxisRaw("Mouse X") / 10, Input.GetAxisRaw("Mouse Y") / 10, 0);
-        }
-        if (Input.GetMouseButton(1))
-        {
-            cameraParent.transform.Rotate(Input.GetAxisRaw("Mouse Y") * 10, Input.GetAxisRaw("Mouse X") * 10, 0);
-        }
-
-        Camera.main.fieldOfView += 20 * Input.GetAxis("Mouse ScrollWheel");
-        if(Camera.main.fieldOfView < 10)
-        {
-            Camera.main.fieldOfView = 10;
-        }
-
-        if (Input.GetMouseButton(2))
-        {
-            Camera.main.transform.position = defaultPosition;
-            cameraParent.transform.rotation = defaultRotation;
-            Camera.main.fieldOfView = defaultZoom;
-        }
+        hal_Sc.noGravity();
     }
 }

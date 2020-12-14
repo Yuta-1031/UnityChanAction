@@ -52,9 +52,9 @@ namespace Footsteps
 
 		public void noGravity()
         {
-			this.t_Up = 9f;
+			this.t_Up = 0f;
 
-			Invoke("_nogravity", 1.0f);
+			Invoke("_nogravity", 1f);
         }
 
 		void _nogravity()
@@ -67,12 +67,29 @@ namespace Footsteps
 			this.t_Up = 0;
         }
 
-		void UpdateAnimator()
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.tag == "Floor")
+            {
+				this.t_Up = 9.81f;
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "Ceiling")
+            {
+				this.t_Up = 0;
+            }
+        }
+
+        void UpdateAnimator()
 		{
 			//transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time / 3, move_Y), transform.position.z);
+
 			thisRigidbody.AddForce(transform.up * t_Up, ForceMode.Force);
 			Debug.Log(t_Up);
-
+			
 			// Get player input
 			directionalInput.x = Input.GetAxisRaw("Horizontal");
 			directionalInput.y = Input.GetAxisRaw("Vertical");
