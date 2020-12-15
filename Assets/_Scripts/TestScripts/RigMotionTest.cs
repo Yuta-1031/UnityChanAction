@@ -5,24 +5,18 @@ using UnityEngine.Animations.Rigging;
 
 public class RigMotionTest : MonoBehaviour
 {
-    [SerializeField] Rigidbody rb;
-
-    private void Start()
+    private void OnCollisionEnter(Collision collision)
     {
-        rb.GetComponent<Rigidbody>();
+        Debug.Log("hit");
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Hit");
     }
 
-    private void FixedUpdate()
+    private void OnParticleCollision(GameObject other)
     {
-        rb.AddForce(transform.up * 9.81f, ForceMode.Force);
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            rb.AddForce(transform.up * -100, ForceMode.Force);
-        }
+        Debug.Log("h");
     }
 }
