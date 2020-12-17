@@ -26,7 +26,7 @@ public class MuzzleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Arrow", 5, 5);   
+        InvokeRepeating("Arrow", 10, 10);   
     }
 
     void Arrow()

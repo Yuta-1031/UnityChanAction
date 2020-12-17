@@ -41,7 +41,7 @@ namespace Footsteps
 				enabled = false;
 			}
 
-			this.t_Up = 9.81f;
+			this.t_Up = 8f;
 		}
 
 
@@ -59,7 +59,7 @@ namespace Footsteps
 
 		void _nogravity()
         {
-			this.t_Up = 9.81f;
+			this.t_Up = 8f;
         }
 
 		public void gravity()
@@ -71,7 +71,7 @@ namespace Footsteps
         {
             if(collision.gameObject.tag == "Floor")
             {
-				this.t_Up = 9.81f;
+				this.t_Up = 8f;
             }
         }
 
@@ -88,7 +88,7 @@ namespace Footsteps
 			//transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time / 3, move_Y), transform.position.z);
 
 			thisRigidbody.AddForce(transform.up * t_Up, ForceMode.Force);
-			Debug.Log(t_Up);
+//			Debug.Log(t_Up);
 			
 			// Get player input
 			directionalInput.x = Input.GetAxisRaw("Horizontal");

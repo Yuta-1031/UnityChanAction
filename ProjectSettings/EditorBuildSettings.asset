@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Temple1Stage.unity
     guid: be4c79a14ad2f46ac90fcff9bae74613
+  - enabled: 1
+    path: Assets/_Scenes/GameScene.unity
+    guid: 9f41b58ca61b74a52be2b543afcab813
   m_configObjects: {}
