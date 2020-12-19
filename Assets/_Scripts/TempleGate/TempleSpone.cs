@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class TempleSpone : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject[] player;
+    private GameObject parent;
 
     private void Awake()
     {
-        //GameManager.instance.player.transform.position = this.transform.position;
-        Instantiate(player, this.transform.position, Quaternion.identity);
+    }
+
+    private void Start()
+    {
+        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectsWithTag("Player");
+        player[0].transform.position = this.transform.position;
+        player[1].transform.position = this.transform.position;
+
+        parent = GameObject.FindWithTag("Parent");
+        parent.transform.position = this.transform.position;
+        //Destroy(this.gameObject);
     }
 }

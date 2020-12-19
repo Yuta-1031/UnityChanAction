@@ -13,6 +13,7 @@ public class MapButton : MonoBehaviour
         {
             this.map.SetActive(true);
             this.check = true;
+            Debug.Log("A");
         }
         else if (check)
         {

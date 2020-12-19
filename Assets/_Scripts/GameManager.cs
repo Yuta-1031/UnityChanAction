@@ -5,17 +5,23 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public GameObject player;
-    public GameObject player2;
+    //public GameObject player;
+    //public GameObject player2;
     public GameObject icon;
     public float playerLife = 100;
     public float player2Life = 100;
 
+    [SerializeField] GameObject player;
+    [SerializeField] GameObject player2;
+    [SerializeField] GameObject cam;
+    [SerializeField] GameObject parent;
+
     private bool pl_Change = true;
+    //private bool pl_Change = true;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
@@ -27,6 +33,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(player2);
+        DontDestroyOnLoad(cam);
 
         player.SetActive(true);
         player2.SetActive(false);
@@ -58,4 +65,5 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 }
