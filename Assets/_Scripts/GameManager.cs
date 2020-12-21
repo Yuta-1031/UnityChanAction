@@ -15,9 +15,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player2;
     [SerializeField] GameObject cam;
     [SerializeField] GameObject parent;
-
+    
     private bool pl_Change = true;
-    //private bool pl_Change = true;
 
     private void Awake()
     {
@@ -34,6 +33,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(player2);
         DontDestroyOnLoad(cam);
+        DontDestroyOnLoad(parent);
 
         player.SetActive(true);
         player2.SetActive(false);

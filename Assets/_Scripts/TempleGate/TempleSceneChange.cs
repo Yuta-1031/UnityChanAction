@@ -5,15 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class TempleSceneChange : MonoBehaviour
 {
-   // public GameObject parentOff;
+   public GameObject Per_h;
+
+    private void Start()
+    {
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            //parentOff.transform.parent = null;
-
-            //SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("GameScene");
         }
     }
 }

@@ -5,21 +5,33 @@ using UnityEngine;
 public class TempleSpone : MonoBehaviour
 {
     private GameObject[] player;
-    private GameObject parent;
+    private GameObject par;
+    private GameObject hal_pl;
+    Parent_Hal plSc;
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectsWithTag("Player");
+        player[0].transform.position = this.transform.position;
+        player[1].transform.position = this.transform.position;
+        Invoke("ParentSpone", 0.1f);
     }
 
     private void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
-        player = GameObject.FindGameObjectsWithTag("Player");
-        player[0].transform.position = this.transform.position;
-        player[1].transform.position = this.transform.position;
+        //hal_pl = GameObject.Find("Hal_UnityChan");
 
-        parent = GameObject.FindWithTag("Parent");
-        parent.transform.position = this.transform.position;
-        //Destroy(this.gameObject);
+        //plSc = hal_pl.GetComponent<Parent_Hal>();
+        //plSc.ParentSerch();
+
+    }
+    private void Update()
+    {
+        //par = GameObject.FindWithTag("Parent");
+        //par.transform.position = this.transform.position;
+        
+    }
+    void ParentSpone()
+    {
     }
 }
