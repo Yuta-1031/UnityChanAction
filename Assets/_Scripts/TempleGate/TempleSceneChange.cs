@@ -15,7 +15,8 @@ public class TempleSceneChange : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("GameScene");
+            //SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TempleSummit");
         }
     }
 }
