@@ -7,10 +7,9 @@ using UnityEngine.AI;
 
 public class ArthurMove : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-
     private Animator thisAni;
     private NavMeshAgent _agent;
+    private RaycastHit[] _raycasthit = new RaycastHit[10];
 
     private void Start()
     {
@@ -18,9 +17,27 @@ public class ArthurMove : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
+    public void  OnDetectObject(Collider collider)
     {
-        //_agent.destination = new Vector3(player.transform.position.x, player.transform.position.y - 1f, player.transform.position.z);
+        if (collider.CompareTag("Player"))
+        {
+            var positionDiff = collider.transform.position - transform.position;
+            var distance = positionDiff.magnitude;
+            var direction = positionDiff.normalized;
+
+            var hitCount = Physics.RaycastNonAlloc(transform.position, direction, _raycasthit, distance);
+            Debug.Log("hitCount: " + hitCount);
+
+            if(hitCount == 1)
+            {
+                _agent.isStopped = false;
+                _agent.destination = collider.transform.position;
+            }
+            else
+            {
+                _agent.isStopped = true;
+            }
+        }
     }
 
     public void ActiveAnimation()
