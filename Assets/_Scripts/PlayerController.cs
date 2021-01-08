@@ -4,8 +4,8 @@ using UnityEngine;
 
 	namespace Footsteps
 {
-
 	[RequireComponent(typeof(Rigidbody), typeof(Animator))]
+
 	public class PlayerController : MonoBehaviour
 	{
 

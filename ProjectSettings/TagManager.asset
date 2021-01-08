@@ -14,6 +14,7 @@ TagManager:
   - Floor
   - Ceiling
   - Parent
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX
@@ -31,11 +32,11 @@ TagManager:
   - WallLamp
   - MapCamNone
   - Summit
-  - 
-  - 
-  - 
-  - 
-  - 
+  - EnemyCollider
+  - EnemyAttackCollider
+  - Enemy
+  - Player1
+  - Player2
   - 
   - 
   - 

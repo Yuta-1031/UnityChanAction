@@ -14,7 +14,7 @@ public class Diamondo_SC : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        Debug.Log(other.gameObject.tag);
+        //Debug.Log(other.gameObject.tag);
         if (other.collider.gameObject.tag == "Sword" || other.collider.gameObject.tag == "Fire")
         {
             Instantiate(ps, this.transform.position, Quaternion.identity);

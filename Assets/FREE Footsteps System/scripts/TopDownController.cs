@@ -3,23 +3,22 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 namespace Footsteps {
-
 	[RequireComponent(typeof(Rigidbody), typeof(Animator))]
+
 	public class TopDownController : MonoBehaviour {
- 
+
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
 
 		Vector2 directionalInput;
 		float moveSpeed;
 		bool isMoving;
-		/*private float isRunning;
-		private float isMoving;
-		private bool isAttack;*/
+
 		public CapsuleCollider capsuleCollider;
 
 
 		void Start() {
+
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
 
