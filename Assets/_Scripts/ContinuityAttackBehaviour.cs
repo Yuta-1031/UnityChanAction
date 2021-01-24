@@ -12,7 +12,7 @@ public class ContinuityAttackBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("Attack", false);
-        position = animator.transform.position;
+        //position = animator.transform.position;
         rotation = animator.transform.rotation;
     }
 
@@ -23,7 +23,7 @@ public class ContinuityAttackBehaviour : StateMachineBehaviour
         {
             animator.SetBool("Attack", true);
         }
-        animator.transform.position = position;
+        //animator.transform.position = position;
         animator.transform.rotation = rotation;
     }
 
@@ -31,7 +31,7 @@ public class ContinuityAttackBehaviour : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.SetBool("Attack", false);
-        animator.transform.position = position;
+        //animator.transform.position = position;
         animator.transform.rotation = rotation;
     }
 

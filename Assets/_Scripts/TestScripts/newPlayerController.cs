@@ -11,22 +11,12 @@ public class newPlayerController : MonoBehaviour
 	}
 
 	private Animator animator;
-	private Vector3 velocity = Vector3.zero;
-	[SerializeField]
-	private float walkSpeed = 1.5f;
-	[SerializeField]
-	private State state;
-	//　キャラの回転スピード
-	[SerializeField]
-	private float charaRotateSpeed = 45f;
-	//　敵サーチスクリプト
 	private SearchEnemy searchEnemy;
-	//　回転中かどうか
-	[SerializeField]
-	private bool isRotate = false;
-	//　敵の方向を向いたとする角度
-	[SerializeField]
-	private float unLockAngle = 1f;
+	private Vector3 velocity = Vector3.zero;
+	[SerializeField] private State state;
+	[SerializeField] private float charaRotateSpeed = 45f;
+	[SerializeField] private bool isRotate = false;
+	[SerializeField] private float unLockAngle = 1f;
 
 	// Use this for initialization
 	void Start()
@@ -42,7 +32,7 @@ public class newPlayerController : MonoBehaviour
 	{
 		if (state == State.Normal)
 		{
-				if (Input.GetButtonDown("Fire2"))
+				if (Input.GetButtonDown("Fire1"))
 				{
 					searchEnemy.SetNowTarget();
 					SetState(State.WaitShot);
@@ -63,11 +53,10 @@ public class newPlayerController : MonoBehaviour
 				if (Mathf.Abs(transform.eulerAngles.y - Quaternion.LookRotation(searchEnemy.GetNowTarget().transform.position - transform.position).eulerAngles.y) < unLockAngle)
 				{
 					isRotate = false;
-					animator.SetFloat("Speed", 0f);
 				}
 			}
 
-			if (!Input.GetButton("Fire2"))
+			if (!Input.GetButton("Fire1"))
 			{
 				SetState(State.Normal);
 			}
