@@ -6,10 +6,21 @@ namespace Footsteps {
 	[RequireComponent(typeof(Rigidbody), typeof(Animator))]
 
 	public class TopDownController : MonoBehaviour {
+
+		public enum State
+		{
+			Normal,
+			WaitShot,
+		}
 		[SerializeField] Transform cameraPivot;
 		[SerializeField] float jogSpeed = 5f;
 		[SerializeField] float rotationSpeed = 270f;
 		[SerializeField] float turningOnSpotRotationSpeed = 360f;
+		[SerializeField] private State state;
+		[SerializeField] private float charaRotateSpeed = 45f;
+		[SerializeField] private bool isRotate = false;
+		[SerializeField] private float unLockAngle = 1f;
+
 
 		Transform thisTransform;
 		Animator thisAnimator;
@@ -18,6 +29,10 @@ namespace Footsteps {
 		Quaternion targetRotation;
 		Vector3 movementDirection;
 		Vector2 directionalInput;
+		//private Animator animator;
+		private SearchEnemy searchEnemy;
+		private Vector3 velocity = Vector3.zero;
+		private float lockRotation;
 		float moveSpeed;
 		bool isMoving;
 		bool turningOnSpot;
@@ -29,10 +44,13 @@ namespace Footsteps {
 			thisTransform = transform;
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
+			searchEnemy = GetComponentInChildren<SearchEnemy>();
 
 			attackMove = true;
 
-			if(!thisAnimator || !thisRigidbody) {
+			state = State.Normal;
+
+			if (!thisAnimator || !thisRigidbody) {
 				//Debug.LogError("Please assign both a rigidbody and an animator to this gameobject, top down controller will not function.");
 				enabled = false;
 			}
@@ -47,33 +65,68 @@ namespace Footsteps {
 
 		void UpdateAnimator() {
 			Debug.Log(attackMove);
+			//Debug.Log(transform.rotation.y);
 			currentLocomotionInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
 
-			directionalInput.x = Input.GetAxisRaw("Horizontal");
-			directionalInput.y = Input.GetAxisRaw("Vertical");
-			moveSpeed = Mathf.Clamp01(directionalInput.magnitude);
-			moveSpeed += (moveSpeed > 0f ? (Input.GetKey(KeyCode.LeftShift) ? 1f : 0f) : 0f);
-			isMoving = Input.GetButton("Horizontal") || Input.GetButton("Vertical");
+			if(attackMove == true)
+            {
+				directionalInput.x = Input.GetAxisRaw("Horizontal");
+				directionalInput.y = Input.GetAxisRaw("Vertical");
+				moveSpeed = Mathf.Clamp01(directionalInput.magnitude);
+				moveSpeed += (moveSpeed > 0f ? (Input.GetKey(KeyCode.LeftShift) ? 1f : 0f) : 0f);
+				isMoving = Input.GetButton("Horizontal") || Input.GetButton("Vertical");
 
-			thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
-			thisAnimator.SetBool("move", isMoving);
+				thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
+				thisAnimator.SetBool("move", isMoving);
+            }
 
 		}
         private void Update()
-        {         
-			if (Input.GetKeyDown(KeyCode.Q))
-            {
-				thisAnimator.SetTrigger("Avoidance");
-            }
+        {
             if (EventSystem.current.IsPointerOverGameObject())
             {
 				return;
             }
 
-            if (Input.GetMouseButtonDown(0))
+			if (state == State.Normal)
+			{
+				if (Input.GetButtonDown("Fire1"))
+				{
+					searchEnemy.SetNowTarget();
+					SetState(State.WaitShot);
+					thisAnimator.SetTrigger("Attack");
+				}
+			}
+			else if (state == State.WaitShot)
+			{
+				if (searchEnemy.GetNowTarget())
+				{
+					isRotate = true;
+					//　キャラクターの向きを変える
+					var targetRotation = Quaternion.LookRotation(searchEnemy.GetNowTarget().transform.position - transform.position);
+					targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+					transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, charaRotateSpeed * Time.deltaTime);
+
+					//　ロックを解除する条件
+					if (Mathf.Abs(transform.eulerAngles.y - Quaternion.LookRotation(searchEnemy.GetNowTarget().transform.position - transform.position).eulerAngles.y) < unLockAngle)
+					{
+						isRotate = false;
+					}
+				}
+
+				if (!Input.GetButton("Fire1"))
+				{
+					SetState(State.Normal);
+				}
+			}
+			if (Input.GetKeyDown(KeyCode.Q))
             {
-				thisAnimator.SetBool("Attack", true);
+				thisAnimator.SetTrigger("Avoidance");
             }
+
+            /*if (Input.GetMouseButtonDown(0))
+            {
+            }*/
         }
         void AttackStart()
         {
@@ -127,6 +180,26 @@ namespace Footsteps {
 				targetRotation = Quaternion.LookRotation(movementDirection);
 				thisTransform.rotation = Quaternion.RotateTowards(thisTransform.rotation, targetRotation, Time.deltaTime * targetRotationSpeed);
 			}
+		}
+		public void SetState(State state)
+		{
+			this.state = state;
+			velocity = Vector3.zero;
+
+			if (state == State.WaitShot)
+			{
+				thisAnimator.SetFloat("Speed", 0f);
+			}
+		}
+
+		public State GetState()
+		{
+			return state;
+		}
+		//　回転中かどうかを返す
+		public bool IsRotate()
+		{
+			return isRotate;
 		}
 	}
 }
