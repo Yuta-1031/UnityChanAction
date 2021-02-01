@@ -15,13 +15,7 @@ public class StartButton : MonoBehaviour
 
         button.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Temple1Stage");
         });
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

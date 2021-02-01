@@ -20,7 +20,7 @@ namespace Footsteps {
 		[SerializeField] private float charaRotateSpeed = 45f;
 		[SerializeField] private bool isRotate = false;
 		[SerializeField] private float unLockAngle = 1f;
-
+		[SerializeField] TrailRenderer sword;
 
 		Transform thisTransform;
 		Animator thisAnimator;
@@ -46,6 +46,7 @@ namespace Footsteps {
 			thisRigidbody = GetComponent<Rigidbody>();
 			searchEnemy = GetComponentInChildren<SearchEnemy>();
 
+			sword.emitting = false;
 			attackMove = true;
 
 			state = State.Normal;
@@ -201,5 +202,15 @@ namespace Footsteps {
 		{
 			return isRotate;
 		}
+
+		void EffectOn()
+		{
+			sword.emitting = true;
+		}
+
+		void EffectOff()
+        {
+			sword.emitting = false;
+        }
 	}
 }
