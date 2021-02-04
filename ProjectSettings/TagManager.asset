@@ -15,6 +15,7 @@ TagManager:
   - Ceiling
   - Parent
   - PlayerCollider
+  - Cam
   layers:
   - Default
   - TransparentFX

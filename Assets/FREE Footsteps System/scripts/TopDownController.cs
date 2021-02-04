@@ -65,7 +65,7 @@ namespace Footsteps {
 		}
 
 		void UpdateAnimator() {
-			Debug.Log(attackMove);
+//			Debug.Log(attackMove);
 			//Debug.Log(transform.rotation.y);
 			currentLocomotionInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
 

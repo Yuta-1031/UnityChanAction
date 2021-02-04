@@ -32,7 +32,7 @@ public class Player1GaugeController : MonoBehaviour
         this.icon4 = transform.Find("Image4").GetComponent<Image>();
         this.lifeText = transform.Find("LifeText").GetComponent<Text>();
         gauge.fillAmount = 0.75f;
-        this.maxLife = GameManager.instance.playerLife;
+        this.maxLife = GameManager.instance.max_PlayerLife;
     }
 
     // Update is called once per frame
@@ -40,7 +40,7 @@ public class Player1GaugeController : MonoBehaviour
     {
         //Debug.Log(greenGauge.fillAmount);
 
-        if(GameManager.instance.playerLife == maxLife)
+        if(GameManager.instance.max_PlayerLife == maxLife)
         {
             icon1.gameObject.SetActive(true);
             icon2.gameObject.SetActive(false);
@@ -53,7 +53,7 @@ public class Player1GaugeController : MonoBehaviour
             yellowGauge.gameObject.SetActive(false);
             redGauge.gameObject.SetActive(false);
         }
-        if(GameManager.instance.playerLife >= maxLife / 2 && GameManager.instance.playerLife < maxLife)
+        if(GameManager.instance.max_PlayerLife >= maxLife / 2 && GameManager.instance.max_PlayerLife < maxLife)
         {
             icon1.gameObject.SetActive(false);
             icon2.gameObject.SetActive(true);
@@ -65,9 +65,9 @@ public class Player1GaugeController : MonoBehaviour
             greenGauge.gameObject.SetActive(true);
             yellowGauge.gameObject.SetActive(false);
             redGauge.gameObject.SetActive(false);
-            greenGauge.fillAmount = GameManager.instance.playerLife / maxLife * fill;
+            greenGauge.fillAmount = GameManager.instance.max_PlayerLife / maxLife * fill;
         }
-        else if(GameManager.instance.playerLife < maxLife / 2 && GameManager.instance.playerLife >= maxLife / 4)
+        else if(GameManager.instance.max_PlayerLife < maxLife / 2 && GameManager.instance.max_PlayerLife >= maxLife / 4)
         {
             icon1.gameObject.SetActive(false);
             icon2.gameObject.SetActive(false);
@@ -79,9 +79,9 @@ public class Player1GaugeController : MonoBehaviour
             greenGauge.gameObject.SetActive(false);
             yellowGauge.gameObject.SetActive(true);
             redGauge.gameObject.SetActive(false);
-            yellowGauge.fillAmount = GameManager.instance.playerLife / maxLife * fill;
+            yellowGauge.fillAmount = GameManager.instance.max_PlayerLife / maxLife * fill;
         }
-        else if (GameManager.instance.playerLife < maxLife / 4)
+        else if (GameManager.instance.max_PlayerLife < maxLife / 4)
         {
             icon1.gameObject.SetActive(false);
             icon2.gameObject.SetActive(false);
@@ -93,7 +93,7 @@ public class Player1GaugeController : MonoBehaviour
             greenGauge.gameObject.SetActive(false);
             yellowGauge.gameObject.SetActive(false);
             redGauge.gameObject.SetActive(true);
-            redGauge.fillAmount = GameManager.instance.playerLife / maxLife * fill;
+            redGauge.fillAmount = GameManager.instance.max_PlayerLife / maxLife * fill;
         }
     }
 }

@@ -1,0 +1,37 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class LifeGauge : MonoBehaviour
+{
+    public Color color1, color2, color3, color4;
+    private float hp;
+    private Image _HPgauge;
+    private float ratio;
+
+    private void Start()
+    {
+        _HPgauge = this.gameObject.GetComponent<Image>();
+        hp = GameManager.instance.player1Life;
+    }
+
+    private void Update()
+    {
+        ratio = hp / GameManager.instance.max_PlayerLife;
+
+        if (ratio > 0.75f)
+        {
+            _HPgauge.color = Color.Lerp(color2, color1, (ratio - 0.75f) * 4f);
+        }
+        else if (ratio > 0.25f)
+        {
+            _HPgauge.color = Color.Lerp(color3, color2, (ratio - 0.25f) * 4f);
+        }
+        else
+        {
+            _HPgauge.color = Color.Lerp(color4, color3, ratio * 4);
+        }
+        _HPgauge.fillAmount = ratio;
+    }
+}

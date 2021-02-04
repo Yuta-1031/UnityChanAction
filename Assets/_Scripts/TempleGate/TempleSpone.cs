@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class TempleSpone : MonoBehaviour
 {
-    private GameObject[] player;
-    private GameObject _cam;
-
     private void Awake()
     {
-        player = GameObject.FindGameObjectsWithTag("Player");
-        _cam = GameObject.FindWithTag("MainCamera");
-
-        player[0].transform.position = this.transform.position;
-        player[1].transform.position = this.transform.position;
-        _cam.transform.position = this.transform.position;
+        GameManager.instance.player.transform.position = this.transform.position;
+        GameManager.instance.player2.transform.position = this.transform.position;
+        GameManager.instance.cam.transform.position = this.transform.position;
     }
 }

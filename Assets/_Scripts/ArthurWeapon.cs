@@ -8,7 +8,7 @@ public class ArthurWeapon : MonoBehaviour
     {
         if(other.gameObject.tag == "Player1")
         {
-            GameManager.instance.playerLife -= 5;
+            GameManager.instance.player1Life -= 5;
         }
         else if(other.gameObject.tag == "Player2")
         {

@@ -10,13 +10,12 @@ public class UniColorChenge : MonoBehaviour
     public GameObject leg;
     public GameObject shirts;
     public GameObject s_sode;
+    public Material _def;
+    public Material _Red;
+    public GameObject fireEffect;
 
     private int colorChange;
 
-    public Material _def;
-    public Material _Red;
-
-    public ParticleSystem firePS;
 
     private bool noPS = false;
 
@@ -40,7 +39,8 @@ public class UniColorChenge : MonoBehaviour
         {
             //colorChange = 1;
             var parent = this.transform;
-            Instantiate(firePS, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 1f, this.gameObject.transform.position.z), Quaternion.identity, parent);
+            GameObject effect = Instantiate(fireEffect) as GameObject;
+            effect.transform.position = gameObject.transform.position;
             RedColor();
         }
     }

@@ -8,7 +8,7 @@ public class GravityAdd : MonoBehaviour
     [SerializeField] Footsteps.Hal_UnityChanController halSc;
    //[SerializeField] GameObject endGravity;
 
-    private void Start()
+    /*rivate void Start()
     {
         //hal_Player = GameObject.FindWithTag("Player");
         halSc = hal_Player.GetComponent<Footsteps.Hal_UnityChanController>();
@@ -22,5 +22,5 @@ public class GravityAdd : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         halSc.noGravity();
-    }
+    }*/
 }

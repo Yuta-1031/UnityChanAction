@@ -4887,7 +4887,7 @@ MonoBehaviour:
   AudioSource: {fileID: 8215432}
   StartTime: 3
   StopTime: 2
-  Duration: 0
+  Duration: 1
   ForceAmount: 0
   ForceRadius: 0
   IsProjectile: 0

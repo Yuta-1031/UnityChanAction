@@ -4092,7 +4092,7 @@ GameObject:
   - component: {fileID: 1549352272095773167}
   - component: {fileID: 1549352272095773169}
   m_Layer: 0
-  m_Name: unitychan 1
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4106,7 +4106,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365071974044797283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.24, y: 3.896, z: 2.18}
+  m_LocalPosition: {x: -0.08999634, y: 2.076437, z: 18.661987}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1365071974045291937}

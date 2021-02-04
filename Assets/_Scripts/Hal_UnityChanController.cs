@@ -11,7 +11,6 @@ namespace Footsteps
 
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
-		TwoBoneIKConstraint r_ArmRig;
 		bool armMotion;
 
 		Vector2 directionalInput;
@@ -50,23 +49,6 @@ namespace Footsteps
 			UpdateAnimator();
 		}
 
-		public void noGravity()
-        {
-			this.t_Up = 0f;
-
-			Invoke("_nogravity", 1f);
-        }
-
-		void _nogravity()
-        {
-			this.t_Up = 8f;
-        }
-
-		public void gravity()
-        {
-			this.t_Up = 0;
-        }
-
         private void OnCollisionEnter(Collision collision)
         {
             if(collision.gameObject.tag == "Floor")
@@ -83,13 +65,11 @@ namespace Footsteps
             }
         }
 
-        void UpdateAnimator()
+		void UpdateAnimator()
 		{
-			//transform.position = new Vector3(transform.position.x, Mathf.PingPong(Time.time / 3, move_Y), transform.position.z);
 
 			thisRigidbody.AddForce(transform.up * t_Up, ForceMode.Force);
-//			Debug.Log(t_Up);
-			
+
 			// Get player input
 			directionalInput.x = Input.GetAxisRaw("Horizontal");
 			directionalInput.y = Input.GetAxisRaw("Vertical");
@@ -101,26 +81,12 @@ namespace Footsteps
 			thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
 			thisAnimator.SetBool("move", isMoving);
 
-			this.r_ArmRig = GameObject.Find("R_ArmConstraint").GetComponent<TwoBoneIKConstraint>();
 
 			if (Input.GetMouseButtonDown(0))
 			{
 				thisAnimator.SetBool("Attack", true);
 				armMotion = true;
 			}
-
-			if (armMotion == true)
-			{
-				r_ArmRig.weight = 0f;
-				//Debug.Log("true");
-			}
-			if (armMotion == false)
-			{
-				r_ArmRig.weight = 1.0f;
-				//Debug.Log("false");
-			}
-
-			//transform.position = new Vector3(transform.position.x, nowPosi + Mathf.PingPong(Time.deltaTime/5, 0.3f), transform.position.z);
 		}
 
 		void AttackStart()

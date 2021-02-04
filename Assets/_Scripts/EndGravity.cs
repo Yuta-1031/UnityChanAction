@@ -8,7 +8,7 @@ public class EndGravity : MonoBehaviour
     [SerializeField] Footsteps.Hal_UnityChanController hal_Sc;
     [SerializeField] GameObject startGravity;
 
-    private void Start()
+    /*private void Start()
     {
         //hal_Player = GameObject.FindWithTag("Player");
         hal_Sc = hal_Player.GetComponent<Footsteps.Hal_UnityChanController>();
@@ -19,6 +19,6 @@ public class EndGravity : MonoBehaviour
         hal_Sc.noGravity();
         startGravity.SetActive(true);
         this.gameObject.SetActive(false);
-    }
+    }*/
 }
 

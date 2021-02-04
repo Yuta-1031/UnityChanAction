@@ -8,13 +8,15 @@ public class GameManager : MonoBehaviour
     //public GameObject player;
     //public GameObject player2;
     public GameObject icon;
-    public float playerLife = 100;
-    public float player2Life = 100;
+    public float max_PlayerLife = 100;
+    public float max_Player2Life = 100;
+    public float player1Life;
+    public float player2Life;
 
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject player2;
-    [SerializeField] GameObject cam;
-    [SerializeField] GameObject parent;
+    [SerializeField] public GameObject player;
+    [SerializeField] public GameObject player2;
+    [SerializeField] public GameObject cam;
+    //[SerializeField] GameObject parent;
     
     private bool pl_Change = true;
 
@@ -33,10 +35,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(player2);
         DontDestroyOnLoad(cam);
-        DontDestroyOnLoad(parent);
+        //DontDestroyOnLoad(parent);
 
         player.SetActive(true);
         player2.SetActive(false);
+
+        player1Life = max_PlayerLife;
+        player2Life = max_Player2Life;
     }
 
     private void Update()
