@@ -6,19 +6,17 @@ using UnityEngine.UI;
 public class LifeGauge : MonoBehaviour
 {
     public Color color1, color2, color3, color4;
-    private float hp;
     private Image _HPgauge;
     private float ratio;
 
     private void Start()
     {
         _HPgauge = this.gameObject.GetComponent<Image>();
-        hp = GameManager.instance.player1Life;
     }
 
     private void Update()
     {
-        ratio = hp / GameManager.instance.max_PlayerLife;
+        ratio = GameManager.instance.player1Life / GameManager.instance.max_PlayerLife;
 
         if (ratio > 0.75f)
         {

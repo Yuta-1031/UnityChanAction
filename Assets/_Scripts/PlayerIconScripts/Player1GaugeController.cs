@@ -5,95 +5,96 @@ using UnityEngine.UI;
 
 public class Player1GaugeController : MonoBehaviour
 {
-    private Image redGauge;
-    private Image yellowGauge;
-    private Image greenGauge;
-    private Image gauge;
-    private Image icon1;
-    private Image icon2;
-    private Image icon3;
-    private Image icon4;
-    private Text lifeText;
-    private float fill = 0.75f;
+    [SerializeField] private Image icon1;
+    [SerializeField] private Image icon2;
+    [SerializeField] private Image icon3;
+    [SerializeField] private Image icon4;
+    [SerializeField] private Image icon5;
+    [SerializeField] private Image icon6;
+    [SerializeField] private Image icon7;
+    [SerializeField] private Image icon8;
     private float maxLife;
-    private float maxLimit = 250f;
-    
+    private float p2_maxLife;
 
-    // Start is called before the first frame update
     void Start()
     {
-        this.gauge = transform.Find("Gauge").GetComponent<Image>();
-        this.redGauge = transform.Find("RedGauge").GetComponent<Image>();
-        this.greenGauge = transform.Find("GreenGauge").GetComponent<Image>();
-        this.yellowGauge = transform.Find("YellowGauge").GetComponent<Image>();
-        this.icon1 = transform.Find("Image1").GetComponent<Image>();
-        this.icon2 = transform.Find("Image2").GetComponent<Image>();
-        this.icon3 = transform.Find("Image3").GetComponent<Image>();
-        this.icon4 = transform.Find("Image4").GetComponent<Image>();
-        this.lifeText = transform.Find("LifeText").GetComponent<Text>();
-        gauge.fillAmount = 0.75f;
         this.maxLife = GameManager.instance.max_PlayerLife;
+        this.p2_maxLife = GameManager.instance.max_Player2Life;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        //Debug.Log(greenGauge.fillAmount);
-
-        if(GameManager.instance.max_PlayerLife == maxLife)
-        {
-            icon1.gameObject.SetActive(true);
-            icon2.gameObject.SetActive(false);
-            icon3.gameObject.SetActive(false);
-            icon4.gameObject.SetActive(false);
-
-            lifeText.color = Color.green;
-
-            greenGauge.gameObject.SetActive(true);
-            yellowGauge.gameObject.SetActive(false);
-            redGauge.gameObject.SetActive(false);
-        }
-        if(GameManager.instance.max_PlayerLife >= maxLife / 2 && GameManager.instance.max_PlayerLife < maxLife)
-        {
-            icon1.gameObject.SetActive(false);
-            icon2.gameObject.SetActive(true);
-            icon3.gameObject.SetActive(false);
-            icon4.gameObject.SetActive(false);
-
-            lifeText.color = Color.green;
-
-            greenGauge.gameObject.SetActive(true);
-            yellowGauge.gameObject.SetActive(false);
-            redGauge.gameObject.SetActive(false);
-            greenGauge.fillAmount = GameManager.instance.max_PlayerLife / maxLife * fill;
-        }
-        else if(GameManager.instance.max_PlayerLife < maxLife / 2 && GameManager.instance.max_PlayerLife >= maxLife / 4)
-        {
-            icon1.gameObject.SetActive(false);
-            icon2.gameObject.SetActive(false);
-            icon3.gameObject.SetActive(true);
-            icon4.gameObject.SetActive(false);
-
-            lifeText.color = Color.yellow;
-
-            greenGauge.gameObject.SetActive(false);
-            yellowGauge.gameObject.SetActive(true);
-            redGauge.gameObject.SetActive(false);
-            yellowGauge.fillAmount = GameManager.instance.max_PlayerLife / maxLife * fill;
-        }
-        else if (GameManager.instance.max_PlayerLife < maxLife / 4)
+        Debug.Log(GameManager.instance.pl_Change);
+        if (!GameManager.instance.pl_Change)
         {
             icon1.gameObject.SetActive(false);
             icon2.gameObject.SetActive(false);
             icon3.gameObject.SetActive(false);
-            icon4.gameObject.SetActive(true);
+            icon4.gameObject.SetActive(false);
 
-            lifeText.color = Color.red;
+            if (GameManager.instance.player2Life == p2_maxLife)
+            {
+                icon5.gameObject.SetActive(true);
+                icon6.gameObject.SetActive(false);
+                icon7.gameObject.SetActive(false);
+                icon8.gameObject.SetActive(false);
+            }
+            if (GameManager.instance.player2Life >= p2_maxLife / 2 && GameManager.instance.player2Life < p2_maxLife)
+            {
+                icon5.gameObject.SetActive(false);
+                icon6.gameObject.SetActive(true);
+                icon7.gameObject.SetActive(false);
+                icon8.gameObject.SetActive(false);
+            }
+            else if (GameManager.instance.player2Life < p2_maxLife / 2 && GameManager.instance.player2Life >= p2_maxLife / 4)
+            {
+                icon5.gameObject.SetActive(false);
+                icon6.gameObject.SetActive(false);
+                icon7.gameObject.SetActive(true);
+                icon8.gameObject.SetActive(false);
+            }
+            else if (GameManager.instance.player2Life < p2_maxLife / 4)
+            {
+                icon5.gameObject.SetActive(false);
+                icon6.gameObject.SetActive(false);
+                icon7.gameObject.SetActive(false);
+                icon8.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            icon5.gameObject.SetActive(false);
+            icon6.gameObject.SetActive(false);
+            icon7.gameObject.SetActive(false);
+            icon8.gameObject.SetActive(false);
 
-            greenGauge.gameObject.SetActive(false);
-            yellowGauge.gameObject.SetActive(false);
-            redGauge.gameObject.SetActive(true);
-            redGauge.fillAmount = GameManager.instance.max_PlayerLife / maxLife * fill;
+            if (GameManager.instance.player1Life == maxLife)
+            {
+                icon1.gameObject.SetActive(true);
+                icon2.gameObject.SetActive(false);
+                icon3.gameObject.SetActive(false);
+                icon4.gameObject.SetActive(false);
+            }
+            if (GameManager.instance.player1Life >= maxLife / 2 && GameManager.instance.player1Life < maxLife)
+            {
+                icon1.gameObject.SetActive(false);
+                icon2.gameObject.SetActive(true);
+                icon3.gameObject.SetActive(false);
+                icon4.gameObject.SetActive(false);
+            }
+            else if (GameManager.instance.player1Life < maxLife / 2 && GameManager.instance.player1Life >= maxLife / 4)
+            {
+                icon1.gameObject.SetActive(false);
+                icon2.gameObject.SetActive(false);
+                icon3.gameObject.SetActive(true);
+                icon4.gameObject.SetActive(false);
+            }
+            else if (GameManager.instance.player1Life < maxLife / 4)
+            {
+                icon1.gameObject.SetActive(false);
+                icon2.gameObject.SetActive(false);
+                icon3.gameObject.SetActive(false);
+                icon4.gameObject.SetActive(true);
+            }
         }
     }
 }
