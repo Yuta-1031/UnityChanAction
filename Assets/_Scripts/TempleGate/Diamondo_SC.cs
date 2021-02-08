@@ -7,10 +7,11 @@ public class Diamondo_SC : MonoBehaviour
 {
     public GameObject ps;
     public GameObject dia;
+    private SearchEnemy searchEnemy;
 
     private void Start()
     {
-
+        searchEnemy = GetComponent<SearchEnemy>();
     }
     private void OnCollisionEnter(Collision other)
     {
@@ -21,6 +22,8 @@ public class Diamondo_SC : MonoBehaviour
             GateOpen op = dia.GetComponent<GateOpen>();
             op.OpenTimeLine();
             Destroy(this.gameObject, 0.2f);
+            //this.gameObject.SetActive(false);
+            //searchEnemy.DeleteEnemyList();
         }
     }
 }

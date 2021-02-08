@@ -23,7 +23,7 @@ public class Player1GaugeController : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(GameManager.instance.pl_Change);
+//        Debug.Log(GameManager.instance.pl_Change);
         if (!GameManager.instance.pl_Change)
         {
             icon1.gameObject.SetActive(false);

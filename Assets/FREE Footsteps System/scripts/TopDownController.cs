@@ -21,7 +21,6 @@ namespace Footsteps {
 		[SerializeField] private bool isRotate = false;
 		[SerializeField] private float unLockAngle = 1f;
 		[SerializeField] TrailRenderer sword;
-
 		Transform thisTransform;
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
@@ -137,6 +136,7 @@ namespace Footsteps {
 
 		void AttackEnd()
         {
+			searchEnemy.DeleteEnemyList();
 			capsuleCollider.enabled = false;
 			attackMove = true;
 			thisAnimator.SetBool("Attack", false);

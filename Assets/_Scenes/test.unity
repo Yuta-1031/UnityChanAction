@@ -641,7 +641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1842826272
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -723,6 +723,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 782789837450926315, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 899981560280960620, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1365071974044797283, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
         type: 3}
       propertyPath: m_Name
@@ -798,5 +808,30 @@ PrefabInstance:
       propertyPath: capsuleCollider
       value: 
       objectReference: {fileID: 545900899}
+    - target: {fileID: 2707154787691384197, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 19.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251405642989101193, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5698690762146320589, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: m_Radius
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8169803455019561091, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: cameraPivot
+      value: 
+      objectReference: {fileID: 10888358}
+    - target: {fileID: 8169803455019561091, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: testPos
+      value: 
+      objectReference: {fileID: 545900898}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4, type: 3}

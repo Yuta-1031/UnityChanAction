@@ -10,7 +10,7 @@ public class SearchEnemy : MonoBehaviour
     private List<GameObject> enemyList;
     //　現在標的にしている敵
     [SerializeField]
-    private GameObject nowTarget;
+    public GameObject nowTarget;
     //　主人公操作スクリプト
     private RotateEnemyChara rotateEnemyChara;
 
@@ -25,6 +25,8 @@ public class SearchEnemy : MonoBehaviour
     {
         //　ターゲットがいる場合に左右のキーを押したらターゲットを変える
         TargetOthers();
+        Debug.Log(nowTarget);
+        //DeleteEnemyList();
     }
 
     void TargetOthers()
@@ -35,13 +37,6 @@ public class SearchEnemy : MonoBehaviour
             nowTarget = null;
             return;
         }
-
-        /*if (rotateEnemyChara.GetState() != RotateEnemyChara.State.WaitShot || rotateEnemyChara.IsRotate() || Mathf.Approximately(Input.GetAxis("Horizontal"), 0f))
-        {
-            return;
-        }*/
-
-        //float inputHorizontal = Input.GetAxis("Horizontal");
 
         GameObject nearTarget = null;
        
@@ -62,21 +57,6 @@ public class SearchEnemy : MonoBehaviour
             {
                 nearTargetAngle = Vector3.SignedAngle(transform.parent.forward, nearTarget.transform.position - transform.parent.position, Vector3.up);
             }
-
-          
-            /*if ((inputHorizontal < 0f && -180f <= targetAngle && targetAngle <= 0f)
-                || (inputHorizontal > 0f && 0f <= targetAngle && targetAngle <= 180f)
-                    )
-            {
-                if (nearTarget == null)
-                {
-                    nearTarget = enemy;
-                }
-                else if (Mathf.Abs(targetAngle) < Mathf.Abs(nearTargetAngle))
-                {
-                    nearTarget = enemy;
-                }
-            }*/
         }
         //　近くのターゲットがいれば設定
         if (nearTarget != null)
@@ -89,9 +69,7 @@ public class SearchEnemy : MonoBehaviour
     {
         Debug.DrawLine(transform.parent.position + Vector3.up, col.gameObject.transform.position + Vector3.up, Color.blue);
         //　敵を登録する
-        if (col.tag == "Enemy"
-            && !enemyList.Contains(col.gameObject)
-        )
+        if (col.tag == "Enemy" && !enemyList.Contains(col.gameObject))
         {
             enemyList.Add(col.gameObject);
         }
@@ -99,9 +77,7 @@ public class SearchEnemy : MonoBehaviour
     void OnTriggerExit(Collider col)
     {
         //　敵がサーチエリアを抜けたらリストから削除
-        if (col.tag == "Enemy"
-            && enemyList.Contains(col.gameObject)
-        )
+        if (col.tag == "Enemy" && enemyList.Contains(col.gameObject))
         {
             //　ターゲットになっていたらターゲットを解除
             if (col.gameObject == nowTarget)
@@ -117,19 +93,19 @@ public class SearchEnemy : MonoBehaviour
         return nowTarget;
     }
     //　敵が死んだ時に呼び出して敵をリストから外す
-    void DeleteEnemyList(GameObject obj)
+    public void DeleteEnemyList()
     {
+        GameObject obj = nowTarget;
+
         if (nowTarget == obj)
         {
             nowTarget = null;
         }
         enemyList.Remove(obj);
     }
-
     //　ターゲットを設定
     public void SetNowTarget()
     {
-
         //　一番近い敵を標的に設定する
         foreach (var enemy in enemyList)
         {
