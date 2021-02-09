@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 namespace Footsteps {
 	[RequireComponent(typeof(Rigidbody), typeof(Animator))]
@@ -24,6 +25,7 @@ namespace Footsteps {
 		Transform thisTransform;
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
+		NavMeshAgent agent;
 		AnimatorStateInfo currentLocomotionInfo;
 		Quaternion targetRotation;
 		Vector3 movementDirection;
@@ -44,6 +46,7 @@ namespace Footsteps {
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
 			searchEnemy = GetComponentInChildren<SearchEnemy>();
+			agent = GetComponent<NavMeshAgent>();
 
 			sword.emitting = false;
 			attackMove = true;
@@ -92,8 +95,8 @@ namespace Footsteps {
 			{
 				if (Input.GetButtonDown("Fire1"))
 				{
-					searchEnemy.SetNowTarget();
-					SetState(State.WaitShot);
+					//searchEnemy.SetNowTarget();
+					//SetState(State.WaitShot);
 					thisAnimator.SetTrigger("Attack");
 				}
 			}
@@ -130,6 +133,8 @@ namespace Footsteps {
         }
         void AttackStart()
         {
+			searchEnemy.SetNowTarget();
+			SetState(State.WaitShot);
 			capsuleCollider.enabled = true;
 			attackMove = false;
         }

@@ -119,15 +119,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.64816225
-        functionName: AttackEnd
+      - time: 0.64667016
+        functionName: EffectOff
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.7451923
-        functionName: EffectOff
+      - time: 0.7319061
+        functionName: AttackEnd
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

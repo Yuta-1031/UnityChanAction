@@ -32,13 +32,13 @@ TagManager:
   - Floor
   - WallLamp
   - MapCamNone
-  - Summit
+  - Wall
   - EnemyCollider
   - EnemyAttackCollider
   - Enemy
   - Player1
   - Player2
-  - 
+  - Sword
   - 
   - 
   - 

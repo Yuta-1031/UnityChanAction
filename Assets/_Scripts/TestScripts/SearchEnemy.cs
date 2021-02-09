@@ -25,7 +25,7 @@ public class SearchEnemy : MonoBehaviour
     {
         //　ターゲットがいる場合に左右のキーを押したらターゲットを変える
         TargetOthers();
-        Debug.Log(nowTarget);
+      // Debug.Log(nowTarget);
         //DeleteEnemyList();
     }
 

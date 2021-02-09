@@ -18,15 +18,19 @@ public class ArthurMove : MonoBehaviour
     public int arthurHP = 100;
     public int deadTime = 3;
 
+    private SearchEnemy searchEnemy;
     private void Start()
     {
         this.thisAni = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
+        Debug.Log("OK");
     }
 
     public void OnDetectObject(Collider col)
     {
         Debug.Log(col.gameObject.tag);
+        Debug.Log(col.name);
+
         if (col.gameObject.tag =="Player" || col.gameObject.CompareTag("Player"))
         {
             if(moveEnabled == true)
@@ -38,13 +42,14 @@ public class ArthurMove : MonoBehaviour
                 var hitCount = Physics.RaycastNonAlloc(transform.position, direction, _raycastHits, distance);
                     _agent.isStopped = false;
                     _agent.destination = col.transform.position;
-                /*if (hitCount == 1)
+
+                if (hitCount == 2)
                 {
                 }
                 else
                 {
                     _agent.isStopped = true;
-                }*/
+                }
             }
             else
             {
@@ -99,7 +104,8 @@ public class ArthurMove : MonoBehaviour
         moveEnabled = false;
         thisAni.SetTrigger("Die");
         yield return new WaitForSeconds(deadTime);
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
     private void Update()

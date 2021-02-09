@@ -21,8 +21,8 @@ public class Diamondo_SC : MonoBehaviour
             Instantiate(ps, this.transform.position, Quaternion.identity);
             GateOpen op = dia.GetComponent<GateOpen>();
             op.OpenTimeLine();
-            Destroy(this.gameObject, 0.2f);
-            //this.gameObject.SetActive(false);
+            //Destroy(this.gameObject, 0.2f);
+            this.gameObject.SetActive(false);
             //searchEnemy.DeleteEnemyList();
         }
     }
