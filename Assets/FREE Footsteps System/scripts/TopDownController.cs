@@ -39,7 +39,8 @@ namespace Footsteps {
 		bool turningOnSpot;
 		public CapsuleCollider capsuleCollider;
 		bool attackMove;
-
+		public bool casueDamege = true;
+		public int test = 100;
 
 		void Start() {
 			thisTransform = transform;
@@ -126,17 +127,15 @@ namespace Footsteps {
             {
 				thisAnimator.SetTrigger("Avoidance");
             }
-
-            /*if (Input.GetMouseButtonDown(0))
-            {
-            }*/
         }
+
         void AttackStart()
         {
 			searchEnemy.SetNowTarget();
 			SetState(State.WaitShot);
 			capsuleCollider.enabled = true;
 			attackMove = false;
+			casueDamege = true;
         }
 
 		void AttackEnd()
@@ -145,6 +144,14 @@ namespace Footsteps {
 			capsuleCollider.enabled = false;
 			attackMove = true;
 			thisAnimator.SetBool("Attack", false);
+        }
+
+		public void CauseDamage(Collider damCol)
+        {
+			if(damCol.gameObject.tag == "Enemy")
+            {
+				casueDamege = false;
+            }
         }
 
 		void MoveCharacter()

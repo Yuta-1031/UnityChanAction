@@ -23,14 +23,10 @@ public class ArthurMove : MonoBehaviour
     {
         this.thisAni = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
-        Debug.Log("OK");
     }
 
     public void OnDetectObject(Collider col)
     {
-        Debug.Log(col.gameObject.tag);
-        Debug.Log(col.name);
-
         if (col.gameObject.tag =="Player" || col.gameObject.CompareTag("Player"))
         {
             if(moveEnabled == true)
@@ -40,8 +36,8 @@ public class ArthurMove : MonoBehaviour
                 var direction = positionDiff.normalized;
 
                 var hitCount = Physics.RaycastNonAlloc(transform.position, direction, _raycastHits, distance);
-                    _agent.isStopped = false;
-                    _agent.destination = col.transform.position;
+                _agent.isStopped = false;
+                _agent.destination = col.transform.position;
 
                 if (hitCount == 2)
                 {

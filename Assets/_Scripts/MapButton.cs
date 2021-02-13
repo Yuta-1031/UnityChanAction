@@ -24,7 +24,7 @@ public class MapButton : MonoBehaviour
 
     private void Update()
     {
-        if (!check)
+        /*if (!check)
         {
             Time.timeScale = 1.0f;
             //Debug.Log("false");
@@ -33,6 +33,6 @@ public class MapButton : MonoBehaviour
         {
             Time.timeScale = 0;
             //Debug.Log("true");
-        }
+        }*/
     }
 }
