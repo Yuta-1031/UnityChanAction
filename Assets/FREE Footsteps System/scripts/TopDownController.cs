@@ -38,6 +38,7 @@ namespace Footsteps {
 		bool isMoving;
 		bool turningOnSpot;
 		public CapsuleCollider capsuleCollider;
+		public GameObject causeDamegeEff;
 		bool attackMove;
 		public bool casueDamege = true;
 		public int test = 100;
@@ -150,7 +151,9 @@ namespace Footsteps {
         {
 			if(damCol.gameObject.tag == "Enemy")
             {
+				var effectPos = damCol.GetComponent<Transform>();
 				casueDamege = false;
+				Instantiate(causeDamegeEff, effectPos);
             }
         }
 

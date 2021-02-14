@@ -16,7 +16,14 @@ public class SleletonController : MonoBehaviour
     private bool attacking;
     public Material[] defColor;
     public Material[] damaColor;
+    public Material[] transparent;
     public Renderer rend;
+    public Transform effectPos;
+    public GameObject effect;
+    public GameObject lineEff;
+    public GameObject destroyEff;
+    private bool onDie;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -32,10 +39,9 @@ public class SleletonController : MonoBehaviour
             anim.SetFloat("Speed", _agent.velocity.magnitude);
         }
 
-        if (this_HP <= 0)
+        if (this_HP <= 0 && onDie == false)
         {
-            anim.speed = 0;
-            rend.GetComponent<Renderer>().materials = damaColor;
+            OnDie();
         }
     }
 
@@ -96,5 +102,27 @@ public class SleletonController : MonoBehaviour
         {
             this_HP -= 10;
         }
+    }
+
+    private void OnDie()
+    {
+        onDie = true;
+        anim.speed = 0;
+        rend.GetComponent<Renderer>().materials = damaColor;
+        Instantiate(effect, effectPos);
+
+        Invoke("DestroyEffect", 1f);
+    }
+
+    private void DestroyEffect()
+    {
+        Instantiate(destroyEff, effectPos);
+        Instantiate(lineEff, effectPos);
+        Invoke("OnDestroy", 0.3f);
+    }
+    private void OnDestroy()
+    {
+        rend.GetComponent<Renderer>().materials = transparent;
+        Destroy(this.gameObject, 5f);
     }
 }
