@@ -22,6 +22,7 @@ public class SleletonController : MonoBehaviour
     public GameObject effect;
     public GameObject lineEff;
     public GameObject destroyEff;
+    public GameObject hitEff;
     private bool onDie;
 
     void Start()
@@ -37,6 +38,11 @@ public class SleletonController : MonoBehaviour
         if (moveEnabled)
         {
             anim.SetFloat("Speed", _agent.velocity.magnitude);
+        }
+
+        if(onDie == true)
+        {
+             _agent.isStopped = true;
         }
 
         if (this_HP <= 0 && onDie == false)
@@ -97,10 +103,20 @@ public class SleletonController : MonoBehaviour
 
     public void BeAttacked(Collider attackCol)
     {
-
-        if (attackCol.gameObject.tag == "Sword" && playerCS.casueDamege == true)
+        if (attackCol.gameObject.tag == "Sword" && playerCS.casueDamege == true && onDie == false)
         {
             this_HP -= 10;
+            Instantiate(hitEff, effectPos);
+            rend.GetComponent<Renderer>().materials = damaColor;
+            Invoke("DefaultColor", 0.2f);
+        }
+    }
+
+    private void DefaultColor()
+    {
+        if(this_HP > 0)
+        {
+            rend.GetComponent<Renderer>().materials = defColor;
         }
     }
 
@@ -123,6 +139,14 @@ public class SleletonController : MonoBehaviour
     private void OnDestroy()
     {
         rend.GetComponent<Renderer>().materials = transparent;
-        Destroy(this.gameObject, 5f);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(onDie == true && other.gameObject.tag == "SearchEnemyCol")
+        {
+            this.gameObject.SetActive(false);
+            //Destroy(this.gameObject);
+        }
     }
 }

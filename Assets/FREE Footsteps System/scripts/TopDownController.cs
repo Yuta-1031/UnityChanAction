@@ -30,15 +30,13 @@ namespace Footsteps {
 		Quaternion targetRotation;
 		Vector3 movementDirection;
 		Vector2 directionalInput;
-		//private Animator animator;
 		private SearchEnemy searchEnemy;
 		private Vector3 velocity = Vector3.zero;
-		private float lockRotation;
 		float moveSpeed;
 		bool isMoving;
 		bool turningOnSpot;
 		public CapsuleCollider capsuleCollider;
-		public GameObject causeDamegeEff;
+		public GameObject casueDamegeEff;
 		bool attackMove;
 		public bool casueDamege = true;
 		public int test = 100;
@@ -151,9 +149,7 @@ namespace Footsteps {
         {
 			if(damCol.gameObject.tag == "Enemy")
             {
-				var effectPos = damCol.GetComponent<Transform>();
 				casueDamege = false;
-				Instantiate(causeDamegeEff, effectPos);
             }
         }
 

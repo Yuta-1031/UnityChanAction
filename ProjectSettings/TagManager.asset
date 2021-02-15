@@ -16,6 +16,7 @@ TagManager:
   - Parent
   - PlayerCollider
   - Cam
+  - SearchEnemyCol
   layers:
   - Default
   - TransparentFX
