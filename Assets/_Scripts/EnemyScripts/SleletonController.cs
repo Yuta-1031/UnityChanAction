@@ -18,11 +18,13 @@ public class SleletonController : MonoBehaviour
     public Material[] damaColor;
     public Material[] transparent;
     public Renderer rend;
+    public TrailRenderer attackTrail;
     public Transform effectPos;
     public GameObject effect;
     public GameObject lineEff;
     public GameObject destroyEff;
     public GameObject hitEff;
+    public CapsuleCollider caps;
     private bool onDie;
 
     void Start()
@@ -31,6 +33,8 @@ public class SleletonController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         playerCS = player.GetComponent<Footsteps.TopDownController>();
+        attackTrail.emitting = false;
+        caps.enabled = false;
     }
 
     void Update()
@@ -105,18 +109,30 @@ public class SleletonController : MonoBehaviour
     {
         if (attackCol.gameObject.tag == "Sword" && playerCS.casueDamege == true && onDie == false)
         {
+            anim.speed = 0.1f;
             this_HP -= 10;
             Instantiate(hitEff, effectPos);
             rend.GetComponent<Renderer>().materials = damaColor;
-            Invoke("DefaultColor", 0.2f);
+            Invoke("SpeedDefault", 0.3f);
+            this.transform.localScale = Vector3.one * 0.65f;
+            Invoke("ScaleDefault", 0.1f);
         }
     }
 
-    private void DefaultColor()
+    private void ScaleDefault()
+    {
+        if(this_HP > 0)
+        {
+            this.transform.localScale = Vector3.one * 0.7f;
+        }
+    }
+
+    private void SpeedDefault()
     {
         if(this_HP > 0)
         {
             rend.GetComponent<Renderer>().materials = defColor;
+            anim.speed = 1.0f;
         }
     }
 
@@ -139,6 +155,7 @@ public class SleletonController : MonoBehaviour
     private void OnDestroy()
     {
         rend.GetComponent<Renderer>().materials = transparent;
+        Invoke("SetFalse", 2f);
     }
 
     private void OnTriggerExit(Collider other)
@@ -148,5 +165,22 @@ public class SleletonController : MonoBehaviour
             this.gameObject.SetActive(false);
             //Destroy(this.gameObject);
         }
+    }
+
+    private void SetFalse()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    void AttackStart()
+    {
+        attackTrail.emitting = true;
+        caps.enabled = true;
+    }
+
+    void AttackEnd()
+    {
+        attackTrail.emitting = false;
+        caps.enabled = false;
     }
 }

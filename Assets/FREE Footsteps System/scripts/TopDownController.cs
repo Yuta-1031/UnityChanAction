@@ -30,16 +30,16 @@ namespace Footsteps {
 		Quaternion targetRotation;
 		Vector3 movementDirection;
 		Vector2 directionalInput;
+		public int test = 100;
+		public bool casueDamege = true;
+		public CapsuleCollider capsuleCollider;
+		public GameObject casueDamegeEff;
 		private SearchEnemy searchEnemy;
 		private Vector3 velocity = Vector3.zero;
 		float moveSpeed;
 		bool isMoving;
 		bool turningOnSpot;
-		public CapsuleCollider capsuleCollider;
-		public GameObject casueDamegeEff;
 		bool attackMove;
-		public bool casueDamege = true;
-		public int test = 100;
 
 		void Start() {
 			thisTransform = transform;
@@ -63,12 +63,9 @@ namespace Footsteps {
 			UpdateAnimator();
 			RotateCharacter();
 			MoveCharacter();
-			//print(directionalInput);
 		}
 
 		void UpdateAnimator() {
-//			Debug.Log(attackMove);
-			//Debug.Log(transform.rotation.y);
 			currentLocomotionInfo = thisAnimator.GetCurrentAnimatorStateInfo(0);
 
 			if(attackMove == true)
@@ -200,7 +197,7 @@ namespace Footsteps {
 
 			if (state == State.WaitShot)
 			{
-				thisAnimator.SetFloat("Speed", 0f);
+				thisAnimator.SetFloat("move_speed", 0f);
 			}
 		}
 
@@ -208,7 +205,7 @@ namespace Footsteps {
 		{
 			return state;
 		}
-		//　回転中かどうかを返す
+		
 		public bool IsRotate()
 		{
 			return isRotate;
@@ -222,6 +219,7 @@ namespace Footsteps {
 		void EffectOff()
         {
 			sword.emitting = false;
+			thisAnimator.SetFloat("Speed", 1f);
         }
 	}
 }

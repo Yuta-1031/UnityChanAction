@@ -16,7 +16,14 @@ public class LifeGauge : MonoBehaviour
 
     private void Update()
     {
-        ratio = GameManager.instance.player1Life / GameManager.instance.max_PlayerLife;
+        if(GameManager.instance.pl_Change == true)
+        {
+            ratio = GameManager.instance.player1Life / GameManager.instance.max_PlayerLife;
+        }
+        else if(GameManager.instance.pl_Change == false)
+        {
+            ratio = GameManager.instance.player2Life / GameManager.instance.max_Player2Life;
+        }
 
         if (ratio > 0.75f)
         {

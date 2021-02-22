@@ -5,21 +5,39 @@ using UnityEngine.AI;
 
 public class SpiderController : MonoBehaviour
 {
-    public int tihi_HP;
+    public int this_HP;
+    public int damage = 5;
+    public Renderer rend;
     public GameObject effect;
+    public GameObject dieEff;
+    public GameObject hitEff;
+    public GameObject hitEff2;
+    public GameObject lineEff;
+    public GameObject smokeEff;
+    public Material defColor;
+    public Material damColor;
+    public Material transparent;
+    public Collider mainCol;
     public Transform effectPos;
-    private NavMeshAgent _agent;
-    private Animator anim;
+    public Transform hitEffectPos;
     public SphereCollider attackCol;
-    private RaycastHit[] _raycastHits = new RaycastHit[10];
-    private bool moveEnabled = true;
+    private Animator anim;
+    private NavMeshAgent _agent;
+    private GameObject gameManager;
+    private GameManager life;
+    private bool onDie = false;
     private bool attacking = false;
+    private bool moveEnabled = true;
+    private bool receiveDamage = true;
     private float attackInterval = 1;
+    private RaycastHit[] _raycastHits = new RaycastHit[10];
 
     void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        gameManager = GameObject.FindGameObjectWithTag("GameController");
+        life = gameManager.GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -28,6 +46,11 @@ public class SpiderController : MonoBehaviour
         if (moveEnabled)
         {
             anim.SetFloat("Speed", _agent.velocity.magnitude);
+        }
+
+        if(this_HP <= 0 && onDie == false)
+        {
+            OnDie();
         }
     }
 
@@ -54,6 +77,31 @@ public class SpiderController : MonoBehaviour
             {
                 _agent.isStopped = true;
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (receiveDamage == true)
+        {
+            if (collision.gameObject.tag == "Sword" && this_HP > 0)
+            {
+                this_HP -= 10;
+                Instantiate(hitEff, hitEffectPos);
+                Instantiate(hitEff2, hitEffectPos);
+                rend.GetComponent<Renderer>().material = damColor;
+                Invoke("DefaultColor", 0.1f);
+                receiveDamage = false;
+            }
+        }
+    }
+
+    void DefaultColor()
+    {
+        if(this_HP > 0)
+        {
+            rend.GetComponent<Renderer>().material = defColor;
+            receiveDamage = true;
         }
     }
 
@@ -85,9 +133,8 @@ public class SpiderController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            GameManager.instance.player1Life -= 2;
+            life.ReceiveDamage(damage);
         }
-        //GameManager.instance.player2Life -= 2;
     }
     private void DealDamage()
     {
@@ -97,5 +144,30 @@ public class SpiderController : MonoBehaviour
     private void ColliderOff()
     {
         attackCol.enabled = false;
+    }
+
+    private void OnDie()
+    {
+        Debug.Log("die");
+        onDie = true;
+        _agent.speed = 0;
+        anim.speed = 0f;
+        mainCol.enabled = false;
+        attackCol.enabled = false;
+        Instantiate(dieEff, hitEffectPos);
+        Invoke("Transparent", 2.0f);
+    }
+
+    private void Transparent()
+    {
+        Instantiate(lineEff, effectPos);
+        Instantiate(smokeEff, effectPos);
+        rend.GetComponent<Renderer>().material = transparent;
+        Invoke("SetFalse", 2f);
+    }
+
+    private void SetFalse()
+    {
+        this.gameObject.SetActive(false);
     }
 }

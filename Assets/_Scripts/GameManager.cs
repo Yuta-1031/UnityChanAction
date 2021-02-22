@@ -76,4 +76,10 @@ public class GameManager : MonoBehaviour
             player2.SetActive(false);
         }
     }
+
+    public void ReceiveDamage(int damage)
+    {
+        player1Life -= damage;
+        //player2Life -= damage;
+    }
 }
