@@ -40,6 +40,13 @@ namespace Footsteps {
 		bool isMoving;
 		bool turningOnSpot;
 		bool attackMove;
+		bool run;
+		bool push_A;
+		bool push_D;
+		bool push_W;
+		bool push_S;
+		float continuousTime = 0.3f;
+		float interval;
 
 		void Start() {
 			thisTransform = transform;
@@ -72,13 +79,17 @@ namespace Footsteps {
             {
 				directionalInput.x = Input.GetAxisRaw("Horizontal");
 				directionalInput.y = Input.GetAxisRaw("Vertical");
-				moveSpeed = Mathf.Clamp01(directionalInput.magnitude);
-				moveSpeed += (moveSpeed > 0f ? (Input.GetKey(KeyCode.LeftShift) ? 1f : 0f) : 0f);
 				isMoving = Input.GetButton("Horizontal") || Input.GetButton("Vertical");
-
 				thisAnimator.SetFloat("move_speed", moveSpeed, 0.3f, Time.fixedDeltaTime);
 				thisAnimator.SetBool("move", isMoving);
-            }
+
+				moveSpeed = Mathf.Clamp01(directionalInput.magnitude);
+				if (run == true && moveSpeed > 0)
+                {
+					moveSpeed += 1f;
+					//moveSpeed += (moveSpeed > 0f ? (Input.GetKey(KeyCode.LeftShift) ? 1f : 0f) : 0f);
+                }
+			}
 
 		}
         private void Update()
@@ -92,8 +103,6 @@ namespace Footsteps {
 			{
 				if (Input.GetButtonDown("Fire1"))
 				{
-					//searchEnemy.SetNowTarget();
-					//SetState(State.WaitShot);
 					thisAnimator.SetTrigger("Attack");
 				}
 			}
@@ -119,11 +128,95 @@ namespace Footsteps {
 					SetState(State.Normal);
 				}
 			}
-			if (Input.GetKeyDown(KeyCode.Q))
+
+			if (Input.GetKeyDown(KeyCode.LeftShift))
+			{
+				if (run == true)
+				{
+					run = false;
+				}
+				else if (run == false)
+				{
+					run = true;
+				}
+			}
+
+            if (Input.GetKeyDown(KeyCode.W))
             {
-				thisAnimator.SetTrigger("Avoidance");
+				if(push_W == false)
+                {
+					push_W = true;
+					interval = 0;
+                }
+                else
+                {
+					if (interval < continuousTime)
+					{
+						thisAnimator.SetBool("Avoidance", true);
+					}
+                }
             }
-        }
+
+			if (Input.GetKeyDown(KeyCode.A))
+			{
+				if (push_A == false)
+				{
+					push_A = true;
+					interval = 0;
+				}
+				else
+				{
+					if (interval < continuousTime)
+					{
+						thisAnimator.SetBool("Avoidance", true);
+					}
+				}
+			}
+
+			if (Input.GetKeyDown(KeyCode.D))
+			{
+				if (push_D == false)
+				{
+					push_D = true;
+					interval = 0;
+				}
+				else
+				{
+					if (interval < continuousTime)
+					{
+						thisAnimator.SetBool("Avoidance", true);
+					}
+				}
+			}
+
+			if (Input.GetKeyDown(KeyCode.S))
+			{
+				if (push_S == false)
+				{
+					push_S = true;
+					interval = 0;
+				}
+				else
+				{
+					if (interval < continuousTime)
+					{
+						thisAnimator.SetBool("Avoidance", true);
+					}
+				}
+			}
+
+			if (push_A || push_W || push_D || push_S)
+            {
+				interval += Time.deltaTime;
+				if(interval > continuousTime)
+                {
+					push_A = false;
+					push_W = false;
+					push_S = false;
+					push_D = false;
+                }
+            }
+		}
 
         void AttackStart()
         {
