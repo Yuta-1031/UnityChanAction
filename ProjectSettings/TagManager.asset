@@ -17,6 +17,7 @@ TagManager:
   - PlayerCollider
   - Cam
   - SearchEnemyCol
+  - Bom
   layers:
   - Default
   - TransparentFX

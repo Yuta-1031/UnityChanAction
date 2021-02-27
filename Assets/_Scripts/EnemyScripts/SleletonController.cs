@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class SleletonController : MonoBehaviour
 {
-    public int this_HP;
+    public float hp;
     private float attackInterval = 1.5f;
     private Animator anim;
     private NavMeshAgent _agent;
@@ -26,6 +26,10 @@ public class SleletonController : MonoBehaviour
     public GameObject hitEff;
     public CapsuleCollider caps;
     private bool onDie;
+    private Collider thisCollider;
+    private bool receiveDamage = true;
+
+    EnemyHP _enemyHP;
 
     void Start()
     {
@@ -33,6 +37,7 @@ public class SleletonController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindWithTag("Player");
         playerCS = player.GetComponent<Footsteps.TopDownController>();
+        thisCollider = GetComponent<Collider>();
         attackTrail.emitting = false;
         caps.enabled = false;
     }
@@ -49,7 +54,7 @@ public class SleletonController : MonoBehaviour
              _agent.isStopped = true;
         }
 
-        if (this_HP <= 0 && onDie == false)
+        if (hp <= 0 && onDie == false)
         {
             OnDie();
         }
@@ -105,31 +110,43 @@ public class SleletonController : MonoBehaviour
         yield return null;
     }
 
-    public void BeAttacked(Collider attackCol)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (attackCol.gameObject.tag == "Sword" && playerCS.casueDamege == true && onDie == false)
+        if (collision.gameObject.tag == "Sword" && onDie == false && receiveDamage)
         {
+            hp -= 10;
             anim.speed = 0.1f;
-            this_HP -= 10;
-            Instantiate(hitEff, effectPos);
-            rend.GetComponent<Renderer>().materials = damaColor;
             Invoke("SpeedDefault", 0.3f);
-            this.transform.localScale = Vector3.one * 0.65f;
             Invoke("ScaleDefault", 0.1f);
+            Instantiate(hitEff, effectPos);
+            this.transform.localScale = Vector3.one * 0.65f;
+            rend.GetComponent<Renderer>().materials = damaColor;
         }
+        else if(collision.gameObject.tag == "Bom" && onDie == false && receiveDamage)
+        {
+            receiveDamage = false;
+            hp -= 10;
+            anim.speed = 0.1f;
+            Invoke("SpeedDefault", 0.3f);
+            Invoke("ScaleDefault", 0.1f);
+            Instantiate(hitEff, effectPos);
+            this.transform.localScale = Vector3.one * 0.65f;
+            rend.GetComponent<Renderer>().materials = damaColor;
+        }    
     }
 
     private void ScaleDefault()
     {
-        if(this_HP > 0)
+        if(hp > 0)
         {
             this.transform.localScale = Vector3.one * 0.7f;
+            receiveDamage = true;
         }
     }
 
     private void SpeedDefault()
     {
-        if(this_HP > 0)
+        if(hp > 0)
         {
             rend.GetComponent<Renderer>().materials = defColor;
             anim.speed = 1.0f;
@@ -140,6 +157,8 @@ public class SleletonController : MonoBehaviour
     {
         onDie = true;
         anim.speed = 0;
+        _agent.speed = 0f;
+        thisCollider.enabled = false;
         rend.GetComponent<Renderer>().materials = damaColor;
         Instantiate(effect, effectPos);
 
@@ -163,7 +182,6 @@ public class SleletonController : MonoBehaviour
         if(onDie == true && other.gameObject.tag == "SearchEnemyCol")
         {
             this.gameObject.SetActive(false);
-            //Destroy(this.gameObject);
         }
     }
 

@@ -79,7 +79,13 @@ public class GameManager : MonoBehaviour
 
     public void ReceiveDamage(int damage)
     {
-        player1Life -= damage;
-        //player2Life -= damage;
+        if (pl_Change)
+        {
+            player1Life -= damage;
+        }
+        else
+        {
+            player2Life -= damage;
+        }
     }
 }

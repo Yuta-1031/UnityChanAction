@@ -14,28 +14,32 @@ namespace Footsteps {
 			WaitShot,
 		}
 		[SerializeField] Transform cameraPivot;
+		[SerializeField] private State state;
 		[SerializeField] float jogSpeed = 5f;
 		[SerializeField] float rotationSpeed = 270f;
-		[SerializeField] float turningOnSpotRotationSpeed = 360f;
-		[SerializeField] private State state;
-		[SerializeField] private float charaRotateSpeed = 45f;
-		[SerializeField] private bool isRotate = false;
 		[SerializeField] private float unLockAngle = 1f;
+		[SerializeField] private float charaRotateSpeed = 45f;
+		[SerializeField] float turningOnSpotRotationSpeed = 360f;
+		[SerializeField] private bool isRotate = false;
 		[SerializeField] TrailRenderer sword;
+
 		Transform thisTransform;
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
 		NavMeshAgent agent;
+
 		AnimatorStateInfo currentLocomotionInfo;
 		Quaternion targetRotation;
 		Vector3 movementDirection;
 		Vector2 directionalInput;
-		public int test = 100;
-		public bool casueDamege = true;
+		Vector3 velocity = Vector3.zero;
+
 		public CapsuleCollider capsuleCollider;
 		public GameObject casueDamegeEff;
 		private SearchEnemy searchEnemy;
-		private Vector3 velocity = Vector3.zero;
+
+		public int test = 100;
+		public bool casueDamege = true;
 		float moveSpeed;
 		bool isMoving;
 		bool turningOnSpot;
@@ -218,30 +222,6 @@ namespace Footsteps {
             }
 		}
 
-        void AttackStart()
-        {
-			searchEnemy.SetNowTarget();
-			SetState(State.WaitShot);
-			capsuleCollider.enabled = true;
-			attackMove = false;
-			casueDamege = true;
-        }
-
-		void AttackEnd()
-        {
-			searchEnemy.DeleteEnemyList();
-			capsuleCollider.enabled = false;
-			attackMove = true;
-			thisAnimator.SetBool("Attack", false);
-        }
-
-		public void CauseDamage(Collider damCol)
-        {
-			if(damCol.gameObject.tag == "Enemy")
-            {
-				casueDamege = false;
-            }
-        }
 
 		void MoveCharacter()
 		{
@@ -283,6 +263,7 @@ namespace Footsteps {
 				thisTransform.rotation = Quaternion.RotateTowards(thisTransform.rotation, targetRotation, Time.deltaTime * targetRotationSpeed);
 			}
 		}
+
 		public void SetState(State state)
 		{
 			this.state = state;
@@ -303,6 +284,23 @@ namespace Footsteps {
 		{
 			return isRotate;
 		}
+
+        void AttackStart()
+        {
+			searchEnemy.SetNowTarget();
+			SetState(State.WaitShot);
+			capsuleCollider.enabled = true;
+			attackMove = false;
+			casueDamege = true;
+        }
+
+		void AttackEnd()
+        {
+			searchEnemy.DeleteEnemyList();
+			capsuleCollider.enabled = false;
+			attackMove = true;
+			thisAnimator.SetBool("Attack", false);
+        }
 
 		void EffectOn()
 		{

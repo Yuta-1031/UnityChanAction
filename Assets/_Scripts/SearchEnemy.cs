@@ -12,13 +12,13 @@ public class SearchEnemy : MonoBehaviour
     [SerializeField]
     public GameObject nowTarget;
     //　主人公操作スクリプト
-    private RotateEnemyChara rotateEnemyChara;
+    private Footsteps.PlayerController rotateEnemyChara;
 
     void Start()
     {
         enemyList = new List<GameObject>();
         nowTarget = null;
-        rotateEnemyChara = GetComponentInParent<RotateEnemyChara>();
+        rotateEnemyChara = GetComponentInParent<Footsteps.PlayerController>();
     }
 
     void Update()
