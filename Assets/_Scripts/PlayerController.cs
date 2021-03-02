@@ -217,5 +217,10 @@ using UnityEngine.UI;
         {
 			bom.transform.parent = null;
 		}
+
+		void WalkStart()
+        {
+			thisAnimator.applyRootMotion = true;
+        }
 	}
 }

@@ -108,6 +108,7 @@ namespace Footsteps {
 				if (Input.GetButtonDown("Fire1"))
 				{
 					thisAnimator.SetTrigger("Attack");
+					run = false;
 				}
 			}
 			else if (state == State.WaitShot)
@@ -311,6 +312,11 @@ namespace Footsteps {
         {
 			sword.emitting = false;
 			thisAnimator.SetFloat("Speed", 1f);
+        }
+
+		void WalkStart()
+        {
+			thisAnimator.applyRootMotion = true;
         }
 	}
 }

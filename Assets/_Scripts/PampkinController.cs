@@ -7,8 +7,6 @@ public class PampkinController : MonoBehaviour
     private Rigidbody _rig;
     public GameObject explosion;
     TrailRenderer trajectory;
-    EnemyHP _hp;
-    public int damage;
 
     private void Start()
     {
@@ -31,11 +29,5 @@ public class PampkinController : MonoBehaviour
     {
         Instantiate(explosion, new Vector3(this.transform.position.x, this.transform.position.y + 0.1f, this.transform.position.z), Quaternion.identity);
         Destroy(this.gameObject, 0.1f);
-
-        if(collision.gameObject.tag == "Enemy")
-        {
-            _hp = collision.gameObject.GetComponent<EnemyHP>();
-            _hp.DamageFromHal(damage);
-        }
     }
 }

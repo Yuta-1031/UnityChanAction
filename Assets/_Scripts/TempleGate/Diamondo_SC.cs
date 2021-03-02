@@ -7,6 +7,8 @@ public class Diamondo_SC : MonoBehaviour
 {
     public GameObject ps;
     public GameObject dia;
+    public Renderer rend;
+    public Material transparent;
     private SearchEnemy searchEnemy;
 
     private void Start()
@@ -21,9 +23,13 @@ public class Diamondo_SC : MonoBehaviour
             Instantiate(ps, this.transform.position, Quaternion.identity);
             GateOpen op = dia.GetComponent<GateOpen>();
             op.OpenTimeLine();
-            //Destroy(this.gameObject, 0.2f);
-            this.gameObject.SetActive(false);
-            //searchEnemy.DeleteEnemyList();
+            rend.GetComponent<Renderer>().material = transparent;
+            Invoke("SetFalse", 5f);
         }
+    }
+
+    void SetFalse()
+    {
+            this.gameObject.SetActive(false);
     }
 }

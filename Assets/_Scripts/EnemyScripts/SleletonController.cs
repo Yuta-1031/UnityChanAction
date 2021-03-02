@@ -6,14 +6,6 @@ using UnityEngine.AI;
 public class SleletonController : MonoBehaviour
 {
     public float hp;
-    private float attackInterval = 1.5f;
-    private Animator anim;
-    private NavMeshAgent _agent;
-    private RaycastHit[] _raycastHits = new RaycastHit[10];
-    private Footsteps.TopDownController playerCS;
-    private GameObject player;
-    private bool moveEnabled = true;
-    private bool attacking;
     public Material[] defColor;
     public Material[] damaColor;
     public Material[] transparent;
@@ -25,19 +17,25 @@ public class SleletonController : MonoBehaviour
     public GameObject destroyEff;
     public GameObject hitEff;
     public CapsuleCollider caps;
-    private bool onDie;
-    private Collider thisCollider;
-    private bool receiveDamage = true;
 
-    EnemyHP _enemyHP;
+    private Animator anim;
+    private GameObject player;
+    private NavMeshAgent _agent;
+    private Collider thisCollider;
+
+    private bool attacking;
+    private bool onDie;
+    private bool moveEnabled = true;
+    private bool receiveDamage = true;
+    private float attackInterval = 1.5f;
+    private RaycastHit[] _raycastHits = new RaycastHit[10];
 
     void Start()
     {
         anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
-        player = GameObject.FindWithTag("Player");
-        playerCS = player.GetComponent<Footsteps.TopDownController>();
         thisCollider = GetComponent<Collider>();
+        player = GameObject.FindWithTag("Player");
         attackTrail.emitting = false;
         caps.enabled = false;
     }

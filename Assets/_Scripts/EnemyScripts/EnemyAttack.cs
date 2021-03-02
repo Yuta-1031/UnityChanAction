@@ -10,6 +10,11 @@ public class EnemyAttack : MonoBehaviour
    
     private void Start()
     {
+        Invoke("Test", 0.5f);
+    }
+
+    void Test()
+    {
         gameManager = GameObject.FindGameObjectWithTag("GameController");
         life = gameManager.GetComponent<GameManager>();
     }
