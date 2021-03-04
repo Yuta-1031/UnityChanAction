@@ -23,7 +23,8 @@ using UnityEngine.UI;
 		[SerializeField] private float charaRotateSpeed = 45f;
 		[SerializeField] float turningOnSpotRotationSpeed = 360f;
 		[SerializeField] private bool isRotate = false;
-
+		[SerializeField] GameObject shield;
+		
 		Transform thisTransform;
 		Animator thisAnimator;
 		Rigidbody thisRigidbody;
@@ -36,16 +37,19 @@ using UnityEngine.UI;
 		Vector3 velocity = Vector3.zero;
 
 		public GameObject pampkinBom;
+		public ParticleSystem shieldEff;
 		public GameObject smoke;
 		public Transform pampkinPos;
 		private SearchEnemy searchEnemy;
 
 
 		float moveSpeed;
+		float shieldColor = 0;
 		bool turningOnSpot;
 		bool isMoving;
 		bool attackMove = true;
-
+		bool shieldOn;
+		bool shieldAnim = true;
 
 		void Start()
 		{
@@ -53,8 +57,9 @@ using UnityEngine.UI;
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
 			searchEnemy = GetComponentInChildren<SearchEnemy>();
-
+			
 			state = State.Normal;
+			shield.SetActive(false);
 
 			if (!thisAnimator || !thisRigidbody)
 			{
@@ -122,6 +127,38 @@ using UnityEngine.UI;
 					SetState(State.Normal);
 				}
 			}
+
+            if (Input.GetKey(KeyCode.LeftShift))
+			{
+				shieldOn = true;
+				shield.SetActive(true);
+			}
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+				shieldEff.Play();
+				shieldColor = 0.7f;
+            }
+
+			if (Input.GetKeyUp(KeyCode.LeftShift))
+			{
+				shieldOn = false;
+			}
+
+            if (shieldOn)
+            {
+				shield.GetComponent<Renderer>().material.color = new Color(0, 0, 0, shieldColor);
+				shieldColor -= Time.deltaTime * 0.15f;
+				if(shieldColor < 0.1)
+                {
+					shieldColor = 0;
+					shieldOn = false;
+                }
+            }
+            else
+            {
+				shield.SetActive(false);
+            }
 		}
 
         void MoveCharacter()
@@ -191,6 +228,8 @@ using UnityEngine.UI;
 			searchEnemy.SetNowTarget();
 			SetState(State.WaitShot);
 			attackMove = false;
+			shieldAnim = false;
+			Invoke("ShieldOn", 2f);
 		}
 
 		void AttackEnd()
@@ -199,6 +238,11 @@ using UnityEngine.UI;
 			attackMove = true;
 			thisAnimator.SetBool("Attack", false);
 		}
+
+		void ShieldOn()
+        {
+			shieldAnim = true;
+        }
 
 		void Spone()
         {
