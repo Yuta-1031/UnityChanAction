@@ -8,7 +8,6 @@ public class SpiderController : MonoBehaviour
     public int this_HP;
     public int damage = 5;
     public Renderer rend;
-    public GameObject effect;
     public GameObject dieEff;
     public GameObject hitEff;
     public GameObject hitEff2;
@@ -20,6 +19,8 @@ public class SpiderController : MonoBehaviour
     public Collider mainCol;
     public Transform effectPos;
     public Transform hitEffectPos;
+    public ParticleSystem effect;
+    public ParticleSystem effect2;
     public SphereCollider attackCol;
     private Animator anim;
     private NavMeshAgent _agent;
@@ -34,10 +35,13 @@ public class SpiderController : MonoBehaviour
 
     void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
+        _agent = GetComponent<NavMeshAgent>();
         gameManager = GameObject.FindGameObjectWithTag("GameController");
         life = gameManager.GetComponent<GameManager>();
+
+        effect.Stop();
+        effect2.Stop();
     }
 
     // Update is called once per frame
@@ -138,7 +142,9 @@ public class SpiderController : MonoBehaviour
     }
     private void DealDamage()
     {
-        Instantiate(effect, effectPos);
+        //Instantiate(effect, effectPos);
+        effect.Play();
+        effect2.Play();
         attackCol.enabled = true;
     }
     private void ColliderOff()

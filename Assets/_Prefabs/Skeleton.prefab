@@ -1012,9 +1012,9 @@ GameObject:
   - component: {fileID: 6109093553924029144}
   - component: {fileID: 6109093553924029146}
   - component: {fileID: 6109093553924029145}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SwordCol
-  m_TagString: Untagged
+  m_TagString: EnemyCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

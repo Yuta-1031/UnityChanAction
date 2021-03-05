@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public bool playerOn;
     public bool pl_Change = true;
 
+    Footsteps.PlayerController hal_cs;
+
     private void Awake()
     {
         if (instance == null)
@@ -33,13 +35,14 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(player2);
         DontDestroyOnLoad(cam);
-        //DontDestroyOnLoad(parent);
 
         player.SetActive(true);
         player2.SetActive(false);
 
         player1Life = max_PlayerLife;
         player2Life = max_Player2Life;
+
+        hal_cs = player2.GetComponent<Footsteps.PlayerController>();
     }
 
     private void Update()
@@ -85,7 +88,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            player2Life -= damage;
+            if(hal_cs.shieldAnim)
+            {
+                player2Life -= damage * 0.5f;
+            }
+            else
+            {
+                player2Life -= damage;
+            }
         }
     }
 }

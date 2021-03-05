@@ -37,8 +37,8 @@ using UnityEngine.UI;
 		Vector3 velocity = Vector3.zero;
 
 		public GameObject pampkinBom;
-		public ParticleSystem shieldEff;
 		public GameObject smoke;
+		public GameObject shieldBrokenEff;
 		public Transform pampkinPos;
 		private SearchEnemy searchEnemy;
 
@@ -48,8 +48,8 @@ using UnityEngine.UI;
 		bool turningOnSpot;
 		bool isMoving;
 		bool attackMove = true;
-		bool shieldOn;
-		bool shieldAnim = true;
+		public bool shieldOn;
+		public bool shieldAnim;
 
 		void Start()
 		{
@@ -60,7 +60,7 @@ using UnityEngine.UI;
 			
 			state = State.Normal;
 			shield.SetActive(false);
-
+			
 			if (!thisAnimator || !thisRigidbody)
 			{
 				//Debug.LogError("Please assign both a rigidbody and an animator to this gameobject, top down controller will not function.");
@@ -130,35 +130,36 @@ using UnityEngine.UI;
 
             if (Input.GetKey(KeyCode.LeftShift))
 			{
-				shieldOn = true;
-				shield.SetActive(true);
+				shieldAnim = true;
 			}
 
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-				shieldEff.Play();
+				shieldOn = true;
+				shield.SetActive(true);
 				shieldColor = 0.7f;
             }
 
 			if (Input.GetKeyUp(KeyCode.LeftShift))
 			{
 				shieldOn = false;
+				shieldAnim = false;
 			}
 
-            if (shieldOn)
-            {
+			if (shieldOn)
+			{
 				shield.GetComponent<Renderer>().material.color = new Color(0, 0, 0, shieldColor);
 				shieldColor -= Time.deltaTime * 0.15f;
-				if(shieldColor < 0.1)
-                {
+				if (shieldColor < 0.1)
+				{
 					shieldColor = 0;
 					shieldOn = false;
-                }
-            }
-            else
-            {
+				}
+			}
+			else if (!shieldOn || !shieldAnim)
+			{
 				shield.SetActive(false);
-            }
+			}
 		}
 
         void MoveCharacter()
@@ -239,9 +240,13 @@ using UnityEngine.UI;
 			thisAnimator.SetBool("Attack", false);
 		}
 
-		void ShieldOn()
+		public void ShieldDestroy(Collider col)
         {
-			shieldAnim = true;
+			if(col.gameObject.CompareTag("EnemyCollider"))
+            {
+				Instantiate(shieldBrokenEff, new Vector3(this.transform.position.x, this.transform.position.y + 1f, this.transform.position.z), Quaternion.identity);
+				shieldOn = false;
+            }
         }
 
 		void Spone()
