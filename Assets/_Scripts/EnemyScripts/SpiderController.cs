@@ -9,8 +9,6 @@ public class SpiderController : MonoBehaviour
     public int damage = 5;
     public Renderer rend;
     public GameObject dieEff;
-    public GameObject hitEff;
-    public GameObject hitEff2;
     public GameObject lineEff;
     public GameObject smokeEff;
     public Material defColor;
@@ -22,6 +20,9 @@ public class SpiderController : MonoBehaviour
     public ParticleSystem effect;
     public ParticleSystem effect2;
     public SphereCollider attackCol;
+    public ParticleSystem swordHitEff;
+    public ParticleSystem hitEff;
+
     private Animator anim;
     private NavMeshAgent _agent;
     private GameObject gameManager;
@@ -42,6 +43,8 @@ public class SpiderController : MonoBehaviour
 
         effect.Stop();
         effect2.Stop();
+        swordHitEff.Stop();
+        hitEff.Stop();
     }
 
     // Update is called once per frame
@@ -91,12 +94,23 @@ public class SpiderController : MonoBehaviour
             if (collision.gameObject.tag == "Sword" && this_HP > 0)
             {
                 this_HP -= 10;
-                Instantiate(hitEff, hitEffectPos);
-                Instantiate(hitEff2, hitEffectPos);
+                swordHitEff.Play();
+                hitEff.Play();
                 rend.GetComponent<Renderer>().material = damColor;
                 Invoke("DefaultColor", 0.1f);
                 receiveDamage = false;
             }
+        }
+    }
+
+    public void BombForDamage(Collision col)
+    {
+        if(col.gameObject.tag == "Bom")
+        {
+            this_HP -= 20;
+            rend.GetComponent<Renderer>().material = damColor;
+            Invoke("DefaultColor", 0.1f);
+            receiveDamage = false;
         }
     }
 
@@ -142,7 +156,6 @@ public class SpiderController : MonoBehaviour
     }
     private void DealDamage()
     {
-        //Instantiate(effect, effectPos);
         effect.Play();
         effect2.Play();
         attackCol.enabled = true;
@@ -154,7 +167,6 @@ public class SpiderController : MonoBehaviour
 
     private void OnDie()
     {
-        Debug.Log("die");
         onDie = true;
         _agent.speed = 0;
         anim.speed = 0f;
