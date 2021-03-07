@@ -235,7 +235,7 @@ using UnityEngine.UI;
 			searchEnemy.SetNowTarget();
 			SetState(State.WaitShot);
 			attackMove = false;
-			shieldAnim = false;
+			shieldOn = false;
 		}
 
 		void AttackEnd()

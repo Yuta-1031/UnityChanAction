@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject player2;
     [SerializeField] public GameObject cam;
+    [SerializeField] GameObject p_Pivot;
 
     public bool playerOn;
     public bool pl_Change = true;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(player);
         DontDestroyOnLoad(player2);
         DontDestroyOnLoad(cam);
+        DontDestroyOnLoad(p_Pivot);
 
         player.SetActive(true);
         player2.SetActive(false);

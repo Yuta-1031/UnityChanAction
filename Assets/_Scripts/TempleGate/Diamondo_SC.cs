@@ -18,7 +18,7 @@ public class Diamondo_SC : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         //Debug.Log(other.gameObject.tag);
-        if (other.collider.gameObject.tag == "Sword" || other.collider.gameObject.tag == "Fire")
+        if (other.collider.gameObject.tag == "Sword" || other.collider.gameObject.tag == "Bom")
         {
             Instantiate(ps, this.transform.position, Quaternion.identity);
             GateOpen op = dia.GetComponent<GateOpen>();

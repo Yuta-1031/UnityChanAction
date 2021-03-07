@@ -19,6 +19,8 @@ TagManager:
   - SearchEnemyCol
   - Bom
   - EnemyCollider
+  - TempleWall
+  - NullTarget
   layers:
   - Default
   - TransparentFX
