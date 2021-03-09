@@ -15,12 +15,18 @@ public class WizardController : MonoBehaviour
     public Renderer rend;
     public Renderer headRend;
     public Renderer weaponRend;
+    public Collider thisCollider;
+    public GameObject playerPos;
     public ParticleSystem circle;
     public ParticleSystem explosion;
+    public ParticleSystem hitEff;
+    public ParticleSystem bulleSmoke;
+    public ParticleSystem destroySmoke;
+    public ParticleSystem lineUp;
     [SerializeField] GameObject attackCollider;
 
     Animator anim;
-    public GameObject playerPos;
+    GameObject rotationTarget;
     NavMeshAgent _agent;
 
     bool attacking;
@@ -28,7 +34,7 @@ public class WizardController : MonoBehaviour
     bool moveEnabled = true;
     bool attackEnable = true;
     bool receiveDamage = true;
-    float attackInterval = 3f;
+    float attackInterval = 5f;
     RaycastHit[] _raycastHits = new RaycastHit[10];
 
     private void Start()
@@ -37,7 +43,15 @@ public class WizardController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
 
         circle.Stop();
+        hitEff.Stop();
+        lineUp.Stop();
         explosion.Stop();
+        bulleSmoke.Stop();
+        destroySmoke.Stop();
+
+        circle.transform.parent = null;
+        explosion.transform.parent = null;
+
         attackCollider.SetActive(false);
     }
 
@@ -53,14 +67,16 @@ public class WizardController : MonoBehaviour
             _agent.speed = 0;
         }
 
-        if(hp <=  0 && !onDie)
+        if (hp <= 0 && !onDie)
         {
-            //onDie();
+            OnDie();
         }
     }
 
     public void OnDetectObject(Collider col)
     {
+        _agent.destination = col.transform.position;
+
         if (col.gameObject.tag == "Player")
         {
             if (moveEnabled)
@@ -71,7 +87,8 @@ public class WizardController : MonoBehaviour
 
                 var hitCount = Physics.RaycastNonAlloc(transform.position, direction, _raycastHits, distance);
                 _agent.isStopped = false;
-                _agent.destination = col.transform.position;
+
+                rotationTarget = col.gameObject;
 
                 if (hitCount > 4)
                 {
@@ -96,7 +113,7 @@ public class WizardController : MonoBehaviour
 
     IEnumerator AttackTimer()
     {
-        if (!attacking)
+        if (!attacking && !onDie)
         {
             attacking = true;
             moveEnabled = false;
@@ -112,6 +129,7 @@ public class WizardController : MonoBehaviour
 
             attacking = false;
             moveEnabled = true;
+            transform.LookAt(rotationTarget.transform);
 
         }
         yield return null;
@@ -119,14 +137,28 @@ public class WizardController : MonoBehaviour
 
     void Attack()
     {
-        anim.SetTrigger("Attack");
-        circle.Stop();
+        if (!onDie)
+        {
+            anim.SetTrigger("Attack");
+            circle.Stop();
+        }
+        else
+        {
+            return;
+        }
     }
     void Explosion()
     {
-        explosion.Play();
-        attackCollider.SetActive(true);
-        Invoke("ColliderOff", 0.5f);
+        if (!onDie)
+        {
+            explosion.Play();
+            attackCollider.SetActive(true);
+            Invoke("ColliderOff", 0.5f);
+        }
+        else
+        {
+            return;
+        }
     }
     void ColliderOff()
     {
@@ -141,5 +173,91 @@ public class WizardController : MonoBehaviour
             GameManager.instance.ReceiveDamage(this.damage);
             attackEnable = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Sword" && onDie == false && receiveDamage)
+        {
+            hp -= 10;
+            anim.speed = 0.1f;
+            receiveDamage = false;
+            Invoke("SpeedDefault", 0.3f);
+            Invoke("ScaleDefault", 0.1f);
+            hitEff.Play();
+            this.transform.localScale = Vector3.one * 0.25f;
+            rend.material = damColor;
+            headRend.material = damColor;
+            weaponRend.material = damColor;
+        }
+        else if (collision.gameObject.tag == "Bom" && onDie == false && receiveDamage)
+        {
+            receiveDamage = false;
+            hp -= 10;
+            anim.speed = 0.1f;
+            Invoke("SpeedDefault", 0.3f);
+            Invoke("ScaleDefault", 0.1f);
+            this.transform.localScale = Vector3.one * 0.25f;
+            rend.material = damColor;
+            headRend.material = damColor;
+            weaponRend.material = damColor;
+        }
+    }
+
+    private void ScaleDefault()
+    {
+        if (hp > 0)
+        {
+            this.transform.localScale = Vector3.one * 0.3f;
+            receiveDamage = true;
+        }
+    }
+
+    private void SpeedDefault()
+    {
+        if (hp > 0)
+        {
+            rend.material = defColor;
+            headRend.material = defColor;
+            weaponRend.material = defColor;
+            anim.speed = 1.0f;
+        }
+    }
+
+    private void OnDie()
+    {
+        onDie = true;
+        anim.speed = 0;
+        _agent.speed = 0f;
+        thisCollider.enabled = false;
+        rend.material = damColor;
+        bulleSmoke.Play();
+
+        Invoke("DestroyEffect", 1f);
+    }
+
+    private void DestroyEffect()
+    {
+        lineUp.Play();
+        destroySmoke.Play();
+        Invoke("OnDestroy", 0.3f);
+    }
+    private void OnDestroy()
+    {
+        rend.material = transparent;
+        Invoke("SetFalse", 2f);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (onDie == true && other.gameObject.tag == "SearchEnemyCol")
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
+
+    private void SetFalse()
+    {
+        this.gameObject.SetActive(false);
     }
 }
