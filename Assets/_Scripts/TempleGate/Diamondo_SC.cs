@@ -6,6 +6,7 @@ using UnityEngine.Playables;
 public class Diamondo_SC : MonoBehaviour
 {
     public GameObject ps;
+    public GameObject diamondo_light;
     public GameObject dia;
     public Renderer rend;
     public Material transparent;
@@ -24,12 +25,13 @@ public class Diamondo_SC : MonoBehaviour
             GateOpen op = dia.GetComponent<GateOpen>();
             op.OpenTimeLine();
             rend.GetComponent<Renderer>().material = transparent;
+            diamondo_light.SetActive(false);
             Invoke("SetFalse", 5f);
         }
     }
 
     void SetFalse()
     {
-            this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 }

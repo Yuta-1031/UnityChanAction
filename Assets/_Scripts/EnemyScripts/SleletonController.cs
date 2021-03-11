@@ -5,18 +5,18 @@ using UnityEngine.AI;
 
 public class SleletonController : MonoBehaviour
 {
-    public float hp;
+    private float hp = 30;
     public Material[] defColor;
     public Material[] damaColor;
     public Material[] transparent;
     public Renderer rend;
     public TrailRenderer attackTrail;
-    public Transform effectPos;
-    public GameObject effect;
-    public GameObject lineEff;
-    public GameObject destroyEff;
-    public GameObject hitEff;
+    //public Transform effectPos;
     public CapsuleCollider caps;
+    public ParticleSystem effect;
+    public ParticleSystem lineEff;
+    public ParticleSystem destroyEff;
+    public ParticleSystem hitEff;
 
     private Animator anim;
     private GameObject player;
@@ -30,6 +30,19 @@ public class SleletonController : MonoBehaviour
     private float attackInterval = 1.5f;
     private RaycastHit[] _raycastHits = new RaycastHit[10];
 
+    public void CallBack()
+    {
+        this.gameObject.SetActive(true);
+
+        hp = 30;
+        rend.GetComponent<Renderer>().materials = defColor;
+
+        effect.Stop();
+        lineEff.Stop();
+        destroyEff.Stop();
+        hitEff.Stop()
+    }
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -38,6 +51,11 @@ public class SleletonController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         attackTrail.emitting = false;
         caps.enabled = false;
+
+        effect.Stop();
+        lineEff.Stop();
+        destroyEff.Stop();
+        hitEff.Stop();
     }
 
     void Update()
@@ -116,7 +134,7 @@ public class SleletonController : MonoBehaviour
             anim.speed = 0.1f;
             Invoke("SpeedDefault", 0.3f);
             Invoke("ScaleDefault", 0.1f);
-            Instantiate(hitEff, effectPos);
+            hitEff.Play();
             this.transform.localScale = Vector3.one * 0.65f;
             rend.GetComponent<Renderer>().materials = damaColor;
         }
@@ -127,7 +145,7 @@ public class SleletonController : MonoBehaviour
             anim.speed = 0.1f;
             Invoke("SpeedDefault", 0.3f);
             Invoke("ScaleDefault", 0.1f);
-            Instantiate(hitEff, effectPos);
+            hitEff.Play();
             this.transform.localScale = Vector3.one * 0.65f;
             rend.GetComponent<Renderer>().materials = damaColor;
         }    
@@ -158,15 +176,15 @@ public class SleletonController : MonoBehaviour
         _agent.speed = 0f;
         thisCollider.enabled = false;
         rend.GetComponent<Renderer>().materials = damaColor;
-        Instantiate(effect, effectPos);
+        effect.Play();
 
         Invoke("DestroyEffect", 1f);
     }
 
     private void DestroyEffect()
     {
-        Instantiate(destroyEff, effectPos);
-        Instantiate(lineEff, effectPos);
+        destroyEff.Play();
+        lineEff.Play();
         Invoke("OnDestroy", 0.3f);
     }
     private void OnDestroy()
