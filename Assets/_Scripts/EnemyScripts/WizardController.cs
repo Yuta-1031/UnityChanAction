@@ -17,6 +17,7 @@ public class WizardController : MonoBehaviour
     public Renderer weaponRend;
     public Collider thisCollider;
     public GameObject playerPos;
+    public GameObject particleBody;
     public ParticleSystem circle;
     public ParticleSystem explosion;
     public ParticleSystem hitEff;
@@ -57,6 +58,10 @@ public class WizardController : MonoBehaviour
 
     private void Update()
     {
+        if (!rotationTarget)
+        {
+            return;
+        }
         if (moveEnabled)
         {
             anim.SetFloat("Speed", _agent.velocity.magnitude);
@@ -71,6 +76,7 @@ public class WizardController : MonoBehaviour
         {
             OnDie();
         }
+
     }
 
     public void OnDetectObject(Collider col)
@@ -240,11 +246,14 @@ public class WizardController : MonoBehaviour
     {
         lineUp.Play();
         destroySmoke.Play();
+        particleBody.SetActive(false);
         Invoke("OnDestroy", 0.3f);
     }
     private void OnDestroy()
     {
         rend.material = transparent;
+        headRend.material = transparent;
+        weaponRend.material = transparent;
         Invoke("SetFalse", 2f);
     }
 
