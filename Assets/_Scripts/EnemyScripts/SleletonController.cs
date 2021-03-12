@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class SleletonController : MonoBehaviour
 {
-    private float hp = 30;
+    public float hp = 30;
     public Material[] defColor;
     public Material[] damaColor;
     public Material[] transparent;
@@ -17,9 +17,8 @@ public class SleletonController : MonoBehaviour
     public ParticleSystem lineEff;
     public ParticleSystem destroyEff;
     public ParticleSystem hitEff;
-
+   
     private Animator anim;
-    private GameObject player;
     private NavMeshAgent _agent;
     private Collider thisCollider;
 
@@ -30,25 +29,30 @@ public class SleletonController : MonoBehaviour
     private float attackInterval = 1.5f;
     private RaycastHit[] _raycastHits = new RaycastHit[10];
 
-    public void CallBack()
+    private void OnEnable()
     {
-        this.gameObject.SetActive(true);
-
-        hp = 30;
-        rend.GetComponent<Renderer>().materials = defColor;
+        if (onDie)
+        {
+            hp = 30;
+            rend.GetComponent<Renderer>().materials = defColor;
+            onDie = false;
+            anim.speed = 1;
+            _agent.speed = 1f;
+            thisCollider.enabled = true;
+        }
 
         effect.Stop();
         lineEff.Stop();
         destroyEff.Stop();
-        hitEff.Stop()
+        hitEff.Stop();
     }
 
     void Start()
     {
+        hp = 30;
         anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         thisCollider = GetComponent<Collider>();
-        player = GameObject.FindWithTag("Player");
         attackTrail.emitting = false;
         caps.enabled = false;
 

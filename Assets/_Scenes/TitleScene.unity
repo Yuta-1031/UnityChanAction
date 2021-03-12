@@ -308,6 +308,11 @@ PrefabInstance:
       propertyPath: cameraPivot
       value: 
       objectReference: {fileID: 905695457}
+    - target: {fileID: 5332656975717906869, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6583277276903994622, guid: a427e1e96b2cb4ff9aa7d1d2281b45b4,
         type: 3}
       propertyPath: m_Name
@@ -653,7 +658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 900512551}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}

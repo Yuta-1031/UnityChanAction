@@ -21,6 +21,8 @@ TagManager:
   - EnemyCollider
   - TempleWall
   - NullTarget
+  - Laser
+  - T_1EneCon
   layers:
   - Default
   - TransparentFX
