@@ -45,6 +45,7 @@ public class SleletonController : MonoBehaviour
         lineEff.Stop();
         destroyEff.Stop();
         hitEff.Stop();
+        //this.transform.localScale = Vector3.one * 0.7f;
     }
 
     void Start()
@@ -60,6 +61,13 @@ public class SleletonController : MonoBehaviour
         lineEff.Stop();
         destroyEff.Stop();
         hitEff.Stop();
+
+       Invoke("PositionZero", 0.1f);
+    }
+
+    void PositionZero()
+    {
+        this.transform.position = Vector3.zero;
     }
 
     void Update()
@@ -141,6 +149,7 @@ public class SleletonController : MonoBehaviour
             hitEff.Play();
             this.transform.localScale = Vector3.one * 0.65f;
             rend.GetComponent<Renderer>().materials = damaColor;
+            Debug.Log("OK");
         }
         else if(collision.gameObject.tag == "Bom" && onDie == false && receiveDamage)
         {

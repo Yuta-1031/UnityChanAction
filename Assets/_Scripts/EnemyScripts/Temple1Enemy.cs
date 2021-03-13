@@ -10,6 +10,11 @@ public class Temple1Enemy : MonoBehaviour
     public Transform sponer1;
     public Transform sponer2;
     public Transform sponer3;
+    public Transform sponer4;
+    public Transform sponer5;
+    public Transform sponer6;
+
+    //public Transform[] sponer;
 
     bool skel1_IsDisPlay = false;
     bool skel2_IsDisPlay = false;
@@ -63,26 +68,28 @@ public class Temple1Enemy : MonoBehaviour
 
             if(!skel1_IsDisPlay && !skel2_IsDisPlay)
             {
-                skeleton1.SetActive(true);
                 skeleton1.transform.position = sponer1.position;
                 skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
             }
             else if(!skel1_IsDisPlay && skel2_IsDisPlay)
             {
-                skeleton1.SetActive(true);
                 skeleton1.transform.position = sponer1.position;
                 skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
             }
             else if(skel1_IsDisPlay && !skel2_IsDisPlay)
             {
-                skeleton2.SetActive(true);
                 skeleton2.transform.position = sponer1.position;
                 skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
             }
             else if(skel1_IsDisPlay && skel2_IsDisPlay)
             {
                 return;
             }
+            Debug.Log(sponer1.position);
+            Debug.Log(skeleton1.transform.position + "S");
         }
     }
 
@@ -94,21 +101,21 @@ public class Temple1Enemy : MonoBehaviour
 
             if (!skel1_IsDisPlay && !skel2_IsDisPlay)
             {
-                skeleton1.SetActive(true);
                 skeleton1.transform.position = sponer2.position;
                 skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
             }
             else if (!skel1_IsDisPlay && skel2_IsDisPlay)
             {
-                skeleton1.SetActive(true);
                 skeleton1.transform.position = sponer2.position;
                 skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
             }
             else if (skel1_IsDisPlay && !skel2_IsDisPlay)
             {
-                skeleton2.SetActive(true);
                 skeleton2.transform.position = sponer2.position;
                 skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
             }
             else if (skel1_IsDisPlay && skel2_IsDisPlay)
             {
@@ -125,21 +132,114 @@ public class Temple1Enemy : MonoBehaviour
 
             if (!skel1_IsDisPlay && !skel2_IsDisPlay)
             {
-                skeleton1.SetActive(true);
                 skeleton1.transform.position = sponer3.position;
                 skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
             }
             else if (!skel1_IsDisPlay && skel2_IsDisPlay)
             {
-                skeleton1.SetActive(true);
                 skeleton1.transform.position = sponer3.position;
                 skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
             }
             else if (skel1_IsDisPlay && !skel2_IsDisPlay)
             {
-                skeleton2.SetActive(true);
                 skeleton2.transform.position = sponer3.position;
                 skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone4(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer4.localPosition;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer4.localPosition;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer4.localPosition;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone5(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer5.position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer5.position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer5.position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone6(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer6.position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer6.position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer6.position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
             }
             else if (skel1_IsDisPlay && skel2_IsDisPlay)
             {
@@ -150,7 +250,7 @@ public class Temple1Enemy : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(skel1_IsDisPlay);
-        Debug.Log(skel2_IsDisPlay);
+       // Debug.Log(skel1_IsDisPlay);
+       // Debug.Log(skel2_IsDisPlay);
     }
 }

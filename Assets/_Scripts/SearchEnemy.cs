@@ -27,6 +27,11 @@ public class SearchEnemy : MonoBehaviour
         TargetOthers();
       // Debug.Log(nowTarget);
         //DeleteEnemyList();
+
+        if(nowTarget == null)
+        {
+            return;
+        }
     }
 
     void TargetOthers()
