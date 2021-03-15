@@ -45,7 +45,8 @@ public class SleletonController : MonoBehaviour
         lineEff.Stop();
         destroyEff.Stop();
         hitEff.Stop();
-        //this.transform.localScale = Vector3.one * 0.7f;
+        receiveDamage = true;
+        this.transform.localScale = Vector3.one * 0.7f;
     }
 
     void Start()
@@ -142,6 +143,7 @@ public class SleletonController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Sword" && onDie == false && receiveDamage)
         {
+            Debug.Log("OK");
             hp -= 10;
             anim.speed = 0.1f;
             Invoke("SpeedDefault", 0.3f);
@@ -149,7 +151,6 @@ public class SleletonController : MonoBehaviour
             hitEff.Play();
             this.transform.localScale = Vector3.one * 0.65f;
             rend.GetComponent<Renderer>().materials = damaColor;
-            Debug.Log("OK");
         }
         else if(collision.gameObject.tag == "Bom" && onDie == false && receiveDamage)
         {
@@ -161,7 +162,8 @@ public class SleletonController : MonoBehaviour
             hitEff.Play();
             this.transform.localScale = Vector3.one * 0.65f;
             rend.GetComponent<Renderer>().materials = damaColor;
-        }    
+        }
+        Debug.Log("Called");    
     }
 
     private void ScaleDefault()
