@@ -16,7 +16,7 @@ public class IconMove1 : MonoBehaviour
     void Update()
     {
         this.target = GameObject.FindGameObjectWithTag("Player");
-        this.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 3f, target.transform.position.z);
+        this.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 50f, target.transform.position.z);
         this.transform.rotation = target.transform.rotation;
         /*Vector3 angle = this.transform.eulerAngles;
         angle.x = this.target.transform.rotation.x;

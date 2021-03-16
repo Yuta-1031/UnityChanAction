@@ -40,7 +40,7 @@ using UnityEngine.UI;
 		public GameObject smoke;
 		public GameObject shieldBrokenEff;
 		public Transform pampkinPos;
-		private SearchEnemy searchEnemy;
+		private Hal_SearchEnemy searchEnemy;
 
 
 		float moveSpeed;
@@ -56,7 +56,7 @@ using UnityEngine.UI;
 			thisTransform = transform;
 			thisAnimator = GetComponent<Animator>();
 			thisRigidbody = GetComponent<Rigidbody>();
-			searchEnemy = GetComponentInChildren<SearchEnemy>();
+			searchEnemy = GetComponentInChildren<Hal_SearchEnemy>();
 			
 			state = State.Normal;
 			shield.SetActive(false);
@@ -264,12 +264,19 @@ using UnityEngine.UI;
 		void PampSpone()
         {
 			bom = Instantiate(pampkinBom, pampkinPos);
-			Invoke("ParentNull", 0.35f);
+			Invoke("ParentNull", 0.33f);
         }
 
 		void ParentNull()
         {
-			bom.transform.parent = null;
+            if (!bom)
+            {
+				return;
+            }
+            else
+            {
+				bom.transform.parent = null;
+            }
 		}
 
 		void WalkStart()

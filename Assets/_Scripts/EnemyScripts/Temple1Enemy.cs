@@ -558,6 +558,494 @@ public class Temple1Enemy : MonoBehaviour
         }
     }
 
+    public void EnemySpone17(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[16].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[16].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[16].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+    public void EnemySpone18(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[17].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[17].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[17].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+    public void EnemySpone19(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[18].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[18].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[18].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+    public void EnemySpone20(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[19].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[19].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[19].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone21(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[20].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[20].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[20].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+    public void EnemySpone22(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[21].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[21].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[21].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+    public void EnemySpone23(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[22].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[22].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[22].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+    public void EnemySpone24(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[23].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[23].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[23].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+    public void EnemySpone25(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[24].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[24].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[24].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone26(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[25].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[25].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[25].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone27(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[26].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[26].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[26].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone28(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[27].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[27].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[27].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone29(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[28].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[28].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[28].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone30(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[29].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[29].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[29].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone31(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[30].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[30].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[30].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
+
+    public void EnemySpone32(Collider col)
+    {
+        if (col.gameObject.tag == "Player" && spone)
+        {
+            spone = false;
+
+            if (!skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[31].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (!skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                skeleton1.transform.position = sponer[31].position;
+                skel1_IsDisPlay = true;
+                skeleton1.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && !skel2_IsDisPlay)
+            {
+                skeleton2.transform.position = sponer[31].position;
+                skel2_IsDisPlay = true;
+                skeleton2.SetActive(true);
+            }
+            else if (skel1_IsDisPlay && skel2_IsDisPlay)
+            {
+                return;
+            }
+        }
+    }
     private void Update()
     {
        // Debug.Log(skel1_IsDisPlay);

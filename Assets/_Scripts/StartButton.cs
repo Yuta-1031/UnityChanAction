@@ -15,7 +15,7 @@ public class StartButton : MonoBehaviour
 
         button.onClick.AddListener(() =>
         {
-            SceneManager.LoadScene("Temple1Stage");
+            SceneManager.LoadScene("TempleScene");
             //SceneManager.LoadScene("TempleSummit");
         });
     }

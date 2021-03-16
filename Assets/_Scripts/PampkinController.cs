@@ -12,7 +12,7 @@ public class PampkinController : MonoBehaviour
     GameObject nullTarget;
     Rigidbody _rig;
     TrailRenderer trajectory;
-    SearchEnemy hal_target;
+    Hal_SearchEnemy hal_target;
     private GameObject searchObj;
 
 
@@ -22,12 +22,21 @@ public class PampkinController : MonoBehaviour
         nullTarget = GameObject.FindGameObjectWithTag("NullTarget");
 
         _rig = GetComponent<Rigidbody>();
-        hal_target = searchObj.GetComponent<SearchEnemy>();
+        hal_target = searchObj.GetComponent<Hal_SearchEnemy>();
         trajectory = GetComponentInChildren<TrailRenderer>();
         trajectory.emitting = false;
        _rig.useGravity = false;
 
-        Invoke("ThrowingBall", 0.4f);
+        if (hal_target.GetNowTarget())
+        {
+            TargetObject = hal_target.GetNowTarget();
+            Invoke("ThrowingBall", 0.4f);
+        }
+        else
+        {
+            TargetObject = nullTarget;
+            Invoke("ThrowingBall", 0.4f);
+        }
     }
 
     void OnGravity()
@@ -37,14 +46,6 @@ public class PampkinController : MonoBehaviour
 
     private void Update()
     {
-        if (hal_target.GetNowTarget())
-        {
-            TargetObject = hal_target.GetNowTarget();
-        }
-        else
-        {
-            TargetObject = nullTarget;
-        }
     }
 
     private void ThrowingBall()

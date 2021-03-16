@@ -10,12 +10,7 @@ public class Diamondo_SC : MonoBehaviour
     public GameObject dia;
     public Renderer rend;
     public Material transparent;
-    private SearchEnemy searchEnemy;
-
-    private void Start()
-    {
-        searchEnemy = GetComponent<SearchEnemy>();
-    }
+  
     private void OnCollisionEnter(Collision other)
     {
         //Debug.Log(other.gameObject.tag);

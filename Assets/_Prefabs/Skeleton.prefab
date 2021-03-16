@@ -575,6 +575,9 @@ MonoBehaviour:
   onTriggerEnter:
     m_PersistentCalls:
       m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5469110268740811375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,6 +1234,9 @@ MonoBehaviour:
   onTriggerEnter:
     m_PersistentCalls:
       m_Calls: []
+  onTriggerExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7507945416282017485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1336,6 +1342,7 @@ GameObject:
   - component: {fileID: 5042032737593097516}
   - component: {fileID: 382065108061039591}
   - component: {fileID: 380270043945122062}
+  - component: {fileID: -7967181740630301685}
   m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
@@ -1350,7 +1357,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8350633414294237196}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.04, y: 3.7402496, z: 14.64}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
@@ -1362,7 +1369,7 @@ Transform:
   - {fileID: 5052760549817018637}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3028176105232531145
 Animator:
   serializedVersion: 3
@@ -1408,6 +1415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe96c93dee5474c1a89de66e1971e92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 30
   defColor:
   - {fileID: 2100000, guid: 286bfe7af7bc3674b8c59fbc601e9291, type: 2}
   - {fileID: 2100000, guid: e5e81676514139d4c85683994e6378df, type: 2}
@@ -1445,6 +1453,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-7967181740630301685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8350633414294237196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf9db670c1df4bb2843b82560ce5409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 9abce3e87c5b94d899d1dbbdc1b9a2ff, type: 3}
+  size: {x: 20, y: 20}
+  rotateWithObject: 0
+  upAxis: {x: 0, y: 1, z: 0}
+  initialIconRotation: 0
+  clampIconInBorder: 1
+  clampDistance: 100
 --- !u!1 &8507826174846622076
 GameObject:
   m_ObjectHideFlags: 0

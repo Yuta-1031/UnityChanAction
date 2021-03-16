@@ -16,7 +16,7 @@ public class IconMove : MonoBehaviour
     void Update()
     {
         this.target = GameObject.FindGameObjectWithTag("Player");
-        this.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 2f, target.transform.position.z);
+        this.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 20f, target.transform.position.z);
         this.transform.rotation = Quaternion.Euler(x, target.transform.rotation.y, target.transform.rotation.z);
        
         /*Vector3 angle = this.transform.eulerAngles;

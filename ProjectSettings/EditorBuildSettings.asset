@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Temple/Temple1Stage.unity
     guid: be4c79a14ad2f46ac90fcff9bae74613
   - enabled: 1
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Temple/TempleSummit.unity
     guid: b61870deedfcc4a2c86ad8de7d07a64c
+  - enabled: 1
+    path: Assets/_Scenes/Temple/TempleScene.unity
+    guid: ee1f49f546082499c86d70b2afe86906
   m_configObjects: {}
